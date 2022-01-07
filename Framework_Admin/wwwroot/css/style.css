@@ -99,9 +99,10 @@ h6 {
   outline: none !important;
 }
 
+
 a:hover {
-  outline: 0;
-  text-decoration: none;
+    outline: 0;
+    text-decoration: none;
 }
 
 a:active {
@@ -3949,10 +3950,13 @@ body.fixed-left .side-menu.left {
 
 .page-content-wrapper {
   margin-top: -100px;
+  overflow:scroll !important;
 }
-
+.datatable-responsive {
+    overflow: scroll !important;
+}
 body.fixed-left-void {
-  min-height: 1024px;
+    min-height: 1024px;
 }
 
 .small-menu .side-menu, .small-menu .topbar-left {
@@ -4168,3 +4172,7 @@ File: Responsive
   white-space: normal !important;
   
 }
+
+/* Nhan them*/
+
+

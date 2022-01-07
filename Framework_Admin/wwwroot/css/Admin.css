@@ -1,0 +1,15 @@
+﻿.page-content-wrapper {
+    margin-top: -100px;
+    overflow: scroll !important;
+}
+
+.datatable-responsive {
+    overflow: scroll !important;
+}
+
+.btn .btn-danger {
+    margin-bottom: 10px;
+}
+
+
+

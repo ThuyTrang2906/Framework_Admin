@@ -1,7 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@model IEnumerable<Framework_Admin.Models.books>
+@{
+    ViewData["Title"] = "Admin";
 }
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,20 +14,21 @@
 
     <title>DaBook Shop</title>
 
-    <link rel="shortcut icon" href="~images/users/logo.png">
+    <link rel="shortcut icon" href=".\images\logo.png">
 
     <!-- DataTables -->
-    <link href="~plugins\datatables\jquery.dataTables.min.css" rel="stylesheet" type="text/css">
-    <link href="~plugins\datatables\buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
-    <link href="~plugins\datatables\fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="~plugins\datatables\responsive.bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="~plugins\datatables\dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
-    <link href="~plugins\datatables\scroller.bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href=".\plugins\datatables\jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+    <link href=".\plugins\datatables\buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href=".\plugins\datatables\fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href=".\plugins\datatables\responsive.bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href=".\plugins\datatables\dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <link href=".\plugins\datatables\scroller.bootstrap.min.css" rel="stylesheet" type="text/css">
 
 
-    <link href="~css\bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="~css\icons.css" rel="stylesheet" type="text/css">
-    <link href="~css\style.css" rel="stylesheet" type="text/css">
+    <link href=".\css\bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href=".\css\icons.css" rel="stylesheet" type="text/css">
+    <link href=".\css\style.css" rel="stylesheet" type="text/css">
+    <link href=".\css\Admin.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -41,8 +43,8 @@
             <!-- LOGO -->
             <div class="topbar-left">
                 <div class="text-center">
-                    <a href="index.cshtml" class="logo"><img src="~images/users/logo.png" </a>
-                    <a href="index.cshtml" class="logo-sm"><img src="~images/users/logo.png" ></a>
+                    <a href="/Home/Index"><img class="logo" src="~/images/logo.png" style="width:80px;" alt="logo-img"></a>
+                    <img class="logo-sm" src="~/images/logo.png" style="width:80px" alt="logo-img">
                 </div>
             </div>
             <!-- Button mobile view to collapse sidebar menu -->
@@ -82,32 +84,32 @@
                 <div id="sidebar-menu">
                     <ul>
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="fas fa-book-open"></i> <span> Sách </span> <span class="float-right"><i class="mdi mdi-plus"></i></span></a>
+                            <a class="waves-effect"  asp-controller="Home" asp-action="Index"><i class="fas fa-book-open"></i> <span> Sách </span> <span class="float-right"><i class="mdi mdi-plus"></i></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="/xemds_sach.html">Xem danh sách sách</a></li>
+                                <li><a >Xem danh sách sách</a></li>
                                 <li><a href="/themsach.html">Thêm sách</a></li>
                                 <li><a href="/capnhat_sach.html">Cập nhật thông tin sách</a></li>
                             </ul>
                         </li>
 
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="fas fa-user-cog"></i><span> Tài khoản </span><span class="float-right"><i class="mdi mdi-plus"></i></span></a>
+                            <a class="waves-effect" ><i class="fas fa-user-cog"></i><span> Tài khoản </span><span class="float-right"><i class="mdi mdi-plus"></i></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="/QLtaikhoan.html">Xem danh sách tài khoản</a></li>
+                                <li><a  asp-controller="Admin" asp-action="QL_taikhoan">Xem danh sách tài khoản</a></li>
                             </ul>
                         </li>
 
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="fas fa-receipt"></i><span> Đơn hàng </span><span class="float-right"><i class="mdi mdi-plus"></i></span></a>
+                            <a  class="waves-effect"><i class="fas fa-receipt"></i><span> Đơn hàng </span><span class="float-right"><i class="mdi mdi-plus"></i></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="/DS_donhang.html">Xem danh sách đơn hàng</a></li>
+                                <li><a asp-controller="Admin" asp-action="DS_DonHang" >Xem danh sách đơn hàng</a></li>
                             </ul>
                         </li>
 
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="fas fa-piggy-bank"></i><span> Khuyến mãi </span><span class="float-right"><i class="mdi mdi-plus"></i></span></a>
+                            <a  class="waves-effect"><i class="fas fa-piggy-bank"></i><span> Khuyến mãi </span><span class="float-right"><i class="mdi mdi-plus"></i></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="/DS_khuyenmai.html">Danh sách khuyến mãi</a></li>
+                                <li><a asp-controller="Admin" asp-action="DS_KhuyenMai">Danh sách khuyến mãi</a></li>
                                 <li><a href="/them_km.html">Thêm khuyến mãi</a></li>
                                 <li><a href="/capnhat_km.html">Cập nhật thông tin khuyến mãi</a></li>
                             </ul>
@@ -157,6 +159,7 @@
 
                                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                                             <thead>
+
                                                 <tr>
                                                     <th>MS</th>
                                                     <th>Tên sách</th>
@@ -174,63 +177,40 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach (var item in Model)
+                                                {
                                                 <tr>
-                                                    <td>SA01</td>
-                                                    <td class="name__list-book">Harry Potter và hòn đá phù thủy</td>
-                                                    <td><img class="img__list-book" src="https://gacsach.com/sites/gacsach.com/files/styles/book310/public/harry-potter-va-hon-da-phu-thuy.jpeg?itok=GbxbVTus" alt=""></td>
-                                                    <td>Giả tưởng</td>
-                                                    <td>J.K.Rowling </td>
-                                                    <td>NXB Trẻ</td>
-                                                    <td>179.000 đ</td>
-                                                    <td>2017</td>
-                                                    <td>12</td>
-                                                    <td>38</td>
+         
+                                                    <td>@item.Masach</td>
+                                                    <td class="name__list-book">@item.Tensach</td>
+                                                    <td><img class="img__list-book" src="@item.Hinhanh" alt=""></td>
+                                                    <td>@item.Theloai</td>
+                                                    <td>@item.Tacgia</td>
+                                                    <td>@item.Nxb</td>
+                                                    <td>@item.Giaban</td>
+                                                    <td>@item.Namxb</td>
+                                                    <td>@item.Soluong</td>
+                                                    <td>0</td>
                                                     <td>Việt Nam</td>
-                                                    <td>Tiếng Việt</td>
+                                                    <td>@item.Ngonngu</td>
                                                     <td style="display: flex;">
-                                                        <span class="btn btn-primary" style=" justify-content: center;">Sửa</span>
-                                                        <span class="btn btn-danger" style=" justify-content: center;">Xóa</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>SA02</td>
-                                                    <td class="name__list-book">Theo đuổi crush, crush sẽ cho bạn thấy crush ghét bạn thế nào. Vậy nên bỏ cuộc đi thôi.</td>
-                                                    <td><img class="img__list-book" src="https://gacsach.com/sites/gacsach.com/files/styles/book310/public/harry-potter-va-hon-da-phu-thuy.jpeg?itok=GbxbVTus" alt=""></td>
-                                                    <td>Giả tưởng</td>
-                                                    <td>J.K.Rowling </td>
-                                                    <td>NXB Trẻ</td>
-                                                    <td>179.000 đ</td>
-                                                    <td>2017</td>
-                                                    <td>32</td>
-                                                    <td>39</td>
-                                                    <td>Việt Nam</td>
-                                                    <td>Tiếng Việt</td>
-                                                    <td style="display: flex;">
-                                                        <span class="btn btn-primary" style=" justify-content: center;">Sửa</span>
-                                                        <span class="btn btn-danger" style=" justify-content: center;">Xóa</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>SA03</td>
-                                                    <td class="name__list-book">Harry Potter và hòn đá phù thủy</td>
-                                                    <td><img class="img__list-book" src="https://gacsach.com/sites/gacsach.com/files/styles/book310/public/harry-potter-va-hon-da-phu-thuy.jpeg?itok=GbxbVTus" alt=""></td>
-                                                    <td>Giả tưởng</td>
-                                                    <td>J.K.Rowling </td>
-                                                    <td>NXB Trẻ</td>
-                                                    <td>179.000 đ</td>
-                                                    <td>2017</td>
-                                                    <td>18</td>
-                                                    <td>88</td>
-                                                    <td>Việt Nam</td>
-                                                    <td>Tiếng Việt</td>
-                                                    <td style="display: flex;">
-                                                        <span class="btn btn-primary" style=" justify-content: center;">Sửa</span>
-                                                        <span class="btn btn-danger" style=" justify-content: center;">Xóa</span>
-                                                    </td>
-                                                </tr>
 
-
-                                            </tbody>
+                                                        <span class="btn btn-primary" style=" justify-content: center;">
+                                                            <a href="/Admin/CapNhat_Sach?Masach=@item.Masach">
+                                                                Sửa
+                                                            </a>
+                                                        
+                                                        </span>
+                                                        <span class="btn btn-danger" style=" justify-content: center;">
+                                                            <a href="/Admin/DeleteBook?Masach=@item.Masach">
+                                                                Xóa
+                                                            </a>
+                                                        
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                 }
+                                                </tbody>
                                         </table>
 
                                     </div>
@@ -279,43 +259,43 @@
     </div>
     <!-- END wrapper -->
     <!-- jQuery  -->
-    <script src="~js\jquery.min.js"></script>
-    <script src="~js\popper.min.js"></script>
-    <script src="~js\bootstrap.min.js"></script>
-    <script src="~js\modernizr.min.js"></script>
-    <script src="~js\detect.js"></script>
-    <script src="~js\fastclick.js"></script>
-    <script src="~js\jquery.slimscroll.js"></script>
-    <script src="~js\jquery.blockUI.js"></script>
-    <script src="~js\waves.js"></script>
-    <script src="~js\wow.min.js"></script>
-    <script src="~js\jquery.nicescroll.js"></script>
-    <script src="~js\jquery.scrollTo.min.js"></script>
+    <script src=".\js\jquery.min.js"></script>
+    <script src=".\js\popper.min.js"></script>
+    <script src=".\js\bootstrap.min.js"></script>
+    <script src=".\js\modernizr.min.js"></script>
+    <script src=".\js\detect.js"></script>
+    <script src=".\js\fastclick.js"></script>
+    <script src=".\js\jquery.slimscroll.js"></script>
+    <script src=".\js\jquery.blockUI.js"></script>
+    <script src=".\js\waves.js"></script>
+    <script src=".\js\wow.min.js"></script>
+    <script src=".\js\jquery.nicescroll.js"></script>
+    <script src=".\js\jquery.scrollTo.min.js"></script>
 
     <!-- Required datatable js-->
-    <script src="~plugins\datatables\jquery.dataTables.min.js"></script>
-    <script src="~plugins\datatables\dataTables.bootstrap4.min.js"></script>
+    <script src=".\plugins\datatables\jquery.dataTables.min.js"></script>
+    <script src=".\plugins\datatables\dataTables.bootstrap4.min.js"></script>
     <!-- Buttons examples -->
-    <script src="~plugins\datatables\dataTables.buttons.min.js"></script>
-    <script src="~plugins\datatables\buttons.bootstrap4.min.js"></script>
+    <script src=".\plugins\datatables\dataTables.buttons.min.js"></script>
+    <script src=".\plugins\datatables\buttons.bootstrap4.min.js"></script>
 
-    <script src="~plugins\datatables\jszip.min.js"></script>
-    <script src="~plugins\datatables\pdfmake.min.js"></script>
-    <script src="~plugins\datatables\vfs_fonts.js"></script>
-    <script src="~plugins\datatables\buttons.html5.min.js"></script>
-    <script src="~plugins\datatables\buttons.print.min.js"></script>
-    <script src="~plugins\datatables\dataTables.fixedHeader.min.js"></script>
-    <script src="~plugins\datatables\dataTables.keyTable.min.js"></script>
-    <script src="~plugins\datatables\dataTables.scroller.min.js"></script>
+    <script src=".\plugins\datatables\jszip.min.js"></script>
+    <script src=".\plugins\datatables\pdfmake.min.js"></script>
+    <script src=".\plugins\datatables\vfs_fonts.js"></script>
+    <script src=".\plugins\datatables\buttons.html5.min.js"></script>
+    <script src=".\plugins\datatables\buttons.print.min.js"></script>
+    <script src=".\plugins\datatables\dataTables.fixedHeader.min.js"></script>
+    <script src=".\plugins\datatables\dataTables.keyTable.min.js"></script>
+    <script src=".\plugins\datatables\dataTables.scroller.min.js"></script>
 
     <!-- Responsive examples -->
-    <script src="~plugins\datatables\dataTables.responsive.min.js"></script>
-    <script src="~plugins\datatables\responsive.bootstrap4.min.js"></script>
+    <script src=".\plugins\datatables\dataTables.responsive.min.js"></script>
+    <script src=".\plugins\datatables\responsive.bootstrap4.min.js"></script>
 
     <!-- Datatable init js -->
-    <script src="~pages\datatables.init.js"></script>
+    <script src=".\pages\datatables.init.js"></script>
 
-    <script src="~js\app.js"></script>
+    <script src=".\js\app.js"></script>
 
 </body>
 </html>
