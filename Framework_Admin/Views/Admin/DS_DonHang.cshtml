@@ -163,9 +163,9 @@
                                                     <label>Đơn hàng trong khoảng thời gian</label>
                                                     <div>
                                                         <div class="input-daterange input-group" id="date-range">
-                                                            <input type="text" class="form-control" name="start">
+                                                            <input type="date" class="form-control" name="start">
                                                             <span class="input-group-addon bg-primary text-white b-0">to</span>
-                                                            <input type="text" class="form-control" name="end">
+                                                            <input type="date" class="form-control" name="end">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -184,8 +184,8 @@
                                                     <th>Mã khuyến mãi</th>
                                                     <th>Tổng tiền</th>
                                                     <th>Thông tin người nhận</th>
-                                                    <td>Tình trạng thanh toán</td>
-                                                    <td>Tình trạng đơn hàng</td>
+                                                    <th>Tình trạng thanh toán</th>
+                                                    <th>Tình trạng đơn hàng</th>
                                                     <th>Hành động</th>
                                                 </tr>
                                             </thead>
@@ -194,26 +194,26 @@
                                                 {
 
                                                     <tr>
-                                                        <td>@item.GetType().GetProperty("Madh").GetValue(item, null)</td>
-                                                        <td>ngày CHƯA LÀM</td>
-                                                        <td>@item.GetType().GetProperty("Matk").GetValue(item, null)</td>
-                                                        <td>@item.GetType().GetProperty("Hinhthucthanhtoan").GetValue(item, null)</td>
-                                                        <td>@item.GetType().GetProperty("Makm").GetValue(item, null)</td>
-                                                        <td>@item.GetType().GetProperty("Tongtien").GetValue(item, null)</td>
+                                                        <td>@item.Madh</td>
+                                                        <td>@item.Ngaylap</td>
+                                                        <td>@item.Matk</td>
+                                                        <td>@item.Hinhthucthanhtoan</td>
+                                                        <td>@item.Makm</td>
+                                                        <td>@item.Tongtien</td>
                                                           @foreach (var item1 in ViewBag.listaccount)
                                                           {
-                                                              if (@item.GetType().GetProperty("Matk").GetValue(item, null) == @item1.GetType().GetProperty("Matk").GetValue(item1, null))
+                                                              if (@item.Matk == @item1.Matk)
                                                               {
                                                                 <td>                                    
-                                                                        @item1.GetType().GetProperty("Hoten").GetValue(item1, null), @item1.GetType().GetProperty("Sodt").GetValue(item1, null), @item1.GetType().GetProperty("Diachi").GetValue(item1, null)
+                                                                        @item1.Hoten, @item1.Sodt, @item1.Diachi
                                                                 </td>
                                                                 }
 
                                                             }
-                                                        <td>@item.GetType().GetProperty("Tinhtrangthanhtoan").GetValue(item, null)</td>
-                                                        <td>@item.GetType().GetProperty("Tinhtrangdonhang").GetValue(item, null)</td>
+                                                        <td>@item.Tinhtrangthanhtoan</td>
+                                                        <td>@item.Tinhtrangdonhang</td>
                                                         <td style="display: flex;">
-                                                            <a href="VanChuyen?Madh=@item.GetType().GetProperty("Madh").GetValue(item, null)" class="btn btn-primary" style="justify-content: center;">Xem chi tiết</a>
+                                                            <a href="VanChuyen?Madh=@item.Madh" class="btn btn-primary" style="justify-content: center;">Xem chi tiết</a>
                                                         </td>
                                                     </tr>
 

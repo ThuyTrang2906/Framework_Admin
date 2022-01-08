@@ -144,27 +144,27 @@
                                             <div class="col-sm-6 col-xs-12">
 
                                                 <div class="m-t-20">
-                                                    <form class="" action="#">
+                                                    <form class="" action="/Admin/InsertBook" method="post">
                                                         <div class="form-group">
                                                             <label>Nhập mã sách</label>
-                                                            <input type="text" class="form-control" required="" placeholder="Mã sách">
+                                                            <input type="text" class="form-control" required="" placeholder="Mã sách" name="masach">
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label>Hình ảnh</label>
                                                             <div>
-                                                                <input parsley-type="url" type="url" class="form-control" required="" placeholder="URL">
+                                                                <input parsley-type="url" type="url" class="form-control" required="" placeholder="URL" name="hinhanh">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Nhập tên sách</label>
                                                             <div>
-                                                                <input data-parsley-type="digits" type="text" class="form-control" required="" placeholder="Tên sách">
+                                                                <input data-parsley-type="digits" type="text" class="form-control" required="" placeholder="Tên sách" name="tensach">
                                                             </div>
                                                         </div>
                                                         <div class="form-group ">
                                                             <label>Thể loại</label>
-                                                            <select class="form-control">
+                                                            <select class="form-control" name="theloai">
                                                                 <option>Giả tưởng</option>
                                                                 <option>Ngôn tình</option>
                                                                 <option>Huyền bí</option>
@@ -191,13 +191,13 @@
                                                         <div class="form-group">
                                                             <label>Nhập tác giả</label>
                                                             <div>
-                                                                <input data-parsley-type="alphanum" type="text" class="form-control" required="" placeholder="Tác giả">
+                                                                <input data-parsley-type="alphanum" type="text" class="form-control" required="" placeholder="Tác giả" name="tacgia">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Nhập nội dung</label>
                                                             <div>
-                                                                <textarea required="" class="form-control" rows="5"></textarea>
+                                                                <textarea required="" class="form-control" rows="5" name="noidung"></textarea>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -212,27 +212,27 @@
                                                         <div class="form-group">
                                                             <label>Nhập nhà xuất bản</label>
                                                             <div>
-                                                                <input data-parsley-type="alphanum" type="text" class="form-control" required="" placeholder="Nhà xuất bản">
+                                                                <input data-parsley-type="alphanum" type="text" class="form-control" required="" placeholder="Nhà xuất bản" name="nxb">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label>Nhập năm xuất bản</label>
                                                             <div>
-                                                                <input data-parsley-type="alphanum" type="text" class="form-control" required="" placeholder="Năm xuất bản">
+                                                                <input data-parsley-type="alphanum" type="text" class="form-control" required="" placeholder="Năm xuất bản" name="namxb">
                                                             </div>
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label>Nhập số lượng</label>
                                                             <div>
-                                                                <input data-parsley-type="number" type="text" class="form-control" required="" placeholder="Số lượng sách">
+                                                                <input data-parsley-type="number" type="text" class="form-control" required="" placeholder="Số lượng sách" name="soluong">
                                                             </div>
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label>Nhập phần trăm giảm</label>
                                                             <div>
-                                                                <input data-parsley-type="number" type="text" class="form-control" required="" placeholder="Phần trăm giảm">
+                                                                <input data-parsley-type="number" type="text" class="form-control" required="" placeholder="Phần trăm giảm" name="giamgia">
                                                             </div>
                                                         </div>
 
@@ -253,7 +253,7 @@
                                                         <div class="form-group" style="margin-top: 17px;">
                                                             <label>Nhập giá bán</label>
                                                             <div>
-                                                                <input data-parsley-type="alphanum" type="text" class="form-control" required="" placeholder="Giá bán">
+                                                                <input data-parsley-type="alphanum" type="text" class="form-control" required="" placeholder="Giá bán" name="giaban">
                                                             </div>
                                                         </div>
 

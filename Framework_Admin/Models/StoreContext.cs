@@ -48,8 +48,8 @@ namespace Framework_Admin.Models
                             Nxb = reader["nxb"].ToString(),
                             Sobinhchon = reader["sobinhchon"].ToString(),
                             Tacgia = reader["tacgia"].ToString(),
-                            //Namxb = Convert.ToDateTime(reader["namxb"]),
-                            
+                            Namxb = Convert.ToDateTime(reader["namxb"]),
+
                             Tensach = reader["tensach"].ToString(),
                             Theloai = reader["theloai"].ToString(),
                             Soluong = Convert.ToInt32(reader["soluong"]),
@@ -64,6 +64,33 @@ namespace Framework_Admin.Models
             return list;
         }
 
+        public int InsertBook(books bk)
+        {
+            using(MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = "INSERT INTO booklist values(@masach, @danhgia, @giaban, @giagoc, @giamgia, @hinhanh, @hinhthuc, @mota, @namxb,@ngonngu, @nxb, @sobinhchon, @tacgia, @tensach, @theloai, @soluong )";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("masach", bk.Masach);
+                cmd.Parameters.AddWithValue("danhgia", bk.Danhgia);
+                cmd.Parameters.AddWithValue("giaban", bk.Giaban);
+                cmd.Parameters.AddWithValue("giagoc", bk.Giagoc);
+                cmd.Parameters.AddWithValue("giamgia", bk.Giamgia);
+                cmd.Parameters.AddWithValue("hinhanh", bk.Hinhanh);
+                cmd.Parameters.AddWithValue("hinhthuc", bk.Hinhthuc);
+                cmd.Parameters.AddWithValue("mota", bk.Mota);
+                cmd.Parameters.AddWithValue("namxb", bk.Namxb);
+                cmd.Parameters.AddWithValue("ngonngu", bk.Ngonngu);
+                cmd.Parameters.AddWithValue("nxb", bk.Nxb);
+                cmd.Parameters.AddWithValue("sobinhchon", bk.Sobinhchon);
+                cmd.Parameters.AddWithValue("tacgia", bk.Tacgia);
+                cmd.Parameters.AddWithValue("tensach", bk.Tensach);
+                cmd.Parameters.AddWithValue("theloai", bk.Theloai);
+                cmd.Parameters.AddWithValue("soluong", bk.Soluong);
+                return cmd.ExecuteNonQuery();
+            }
+        }
+
         public int XoaSach(string Id)
         {
             using (MySqlConnection conn = GetConnection())
@@ -76,18 +103,24 @@ namespace Framework_Admin.Models
             }
         }
 
-        public books GetBookById(string Id)
+        public books GetBookById(string masach, string tensach, string hinhanh, string theloai, string tacgia, string nxb, string sl)
         {
             books list = new books();
 
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                string str = "select * from booklist where masach=@Masach";
+                string str = "select * from booklist where masach=@Masach and tensach=@Tensach and Hinhanh=@Hinhanh and theloai=@Theloai and tacgia=@Tacgia and nxb=@nxb and soluong=@Soluong";
                 
-                MySqlCommand cmd = new MySqlCommand(str, conn);
-                cmd.Parameters.AddWithValue("Masach", Id);
-                using (var reader = cmd.ExecuteReader())
+                MySqlCommand d = new MySqlCommand(str, conn);
+                d.Parameters.AddWithValue("Masach", masach);
+                d.Parameters.AddWithValue("Tensach", tensach);
+                d.Parameters.AddWithValue("Hinhanh", hinhanh);
+                d.Parameters.AddWithValue("Theloai", theloai);
+                d.Parameters.AddWithValue("Tacgia", tacgia);
+                d.Parameters.AddWithValue("Nxb", nxb);
+                d.Parameters.AddWithValue("Soluong", sl);
+                using (var reader = d.ExecuteReader())
                 {
                     if (reader.Read())
                     {
@@ -96,18 +129,17 @@ namespace Framework_Admin.Models
                         list.Giaban = Convert.ToInt32(reader["giaban"]);
                         list.Giagoc = Convert.ToInt32(reader["giagoc"]);
                         list.Giamgia = Convert.ToInt32(reader["giamgia"]);
-                        list.Soluong = Convert.ToInt32(reader["soluong"]);
                         list.Hinhanh = reader["hinhanh"].ToString();
-                        list.Hinhthuc = reader["hinhthuc"].ToString();
-                        list.Ngonngu = reader["ngonngu"].ToString();
+                        list.Hinhthuc = reader["hinhthuc"].ToString();                        
                         list.Mota = reader["mota"].ToString();
                         list.Nxb = reader["nxb"].ToString();
                         list.Sobinhchon = reader["sobinhchon"].ToString();
                         list.Tacgia = reader["tacgia"].ToString();
-                        //list.Namxb = Convert.ToDateTime(reader["namxb"]);
+                        list.Namxb = Convert.ToDateTime(reader["namxb"]);
                         list.Tensach = reader["tensach"].ToString();
                         list.Theloai = reader["theloai"].ToString();
-                        
+                        list.Soluong = Convert.ToInt32(reader["soluong"]);
+
                     }
                 };
 
@@ -180,8 +212,8 @@ namespace Framework_Admin.Models
                             Tinhtrang = reader["tinhtrang"].ToString(),
                             Sodt = reader["sodt"].ToString(),
                             
-                            /*   Ngaytao = Convert.ToDateTime(reader["ngaytao"]),
-                               Ngaysinh = Convert.ToDateTime(reader["ngaysinh"]),*/
+                              Ngaytao = Convert.ToDateTime(reader["ngaytao"]),
+                              Ngaysinh = Convert.ToDateTime(reader["ngaysinh"]),
 
 
                         });
@@ -288,8 +320,8 @@ namespace Framework_Admin.Models
                             Manhap = reader["manhap"].ToString(),
                             Noidung = reader["noidung"].ToString(),
                             
-                            /* Ngaybd = Convert.ToDateTime(reader["ngaybd"]),
-                             Ngaykt = Convert.ToDateTime(reader["ngaykt"]),*/
+                             Ngaybd = Convert.ToDateTime(reader["ngaybd"]),
+                             Ngaykt = Convert.ToDateTime(reader["ngaykt"]),
 
 
                         });
@@ -330,8 +362,8 @@ namespace Framework_Admin.Models
                             Manhap = reader["manhap"].ToString(),
                             Noidung = reader["noidung"].ToString(),
 
-                            //Ngaybd = Convert.ToDateTime(reader["ngaybd"]),
-                            //Ngaykt = Convert.ToDateTime(reader["ngaykt"]),
+                            Ngaybd = Convert.ToDateTime(reader["ngaybd"]),
+                            Ngaykt = Convert.ToDateTime(reader["ngaykt"]),
 
                         };
                     }
@@ -373,9 +405,8 @@ namespace Framework_Admin.Models
                             Tongtien = Convert.ToInt32(reader["tongtien"]),
                             Hinhthucthanhtoan = reader["hinhthucthanhtoan"].ToString(),
 
-
-                            /*   Ngaycapnhat = Convert.ToDateTime(reader["ngaycapnhat"]),
-                               Ngaylap = Convert.ToDateTime(reader["ngaylap"]),*/
+                               Ngaycapnhat = Convert.ToDateTime(reader["ngaycapnhat"]),
+                               Ngaylap = Convert.ToDateTime(reader["ngaylap"]),
 
 
                         });
@@ -418,8 +449,8 @@ namespace Framework_Admin.Models
 
 
 
-                        /*  kh.Ngaycapnhat = Convert.ToDateTime(reader["ngaycapnhat"]),
-                           kh.Ngaylap = Convert.ToDateTime(reader["ngaylap"]),*/
+                          Ngaycapnhat = Convert.ToDateTime(reader["ngaycapnhat"]),
+                           Ngaylap = Convert.ToDateTime(reader["ngaylap"]),
                         }; 
                     } 
                 }

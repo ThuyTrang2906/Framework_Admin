@@ -25,11 +25,29 @@ namespace Framework_Admin.Controllers
         }
 
 
-        public IActionResult CapNhat_Sach(string Id)
+        public IActionResult CapNhat_Sach(string id1,string id2, string id3, string id4, string id5, string id6, string id7)
         {
-            return View(_storeContext.GetBookById(Id));
+           // books viewbook = new books();//.GetBookById(id1, id2, id3, id4, id5, id6, id7);
+            ViewBag.Masach = id1;
+            ViewBag.Tensach = id2;
+            ViewBag.Hinhanh = id3;
+            ViewBag.Theloai = id4;
+            ViewBag.Tacgia = id5;
+            ViewBag.Nxb = id6;
+            ViewBag.Soluong = id7;
+            return View();
         }
+        public IActionResult ThemSach()
+        {
+            return View();
+        }
+        public IActionResult InsertBook(books bk)
+        {
+            int count = _storeContext.InsertBook(bk);
 
+            return RedirectToAction("Index", "Home");
+
+        }
         public IActionResult UpdateById(books book)
         {
             _storeContext.UpdateBookById(book);

@@ -28,7 +28,7 @@
     <link href=".\css\bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href=".\css\icons.css" rel="stylesheet" type="text/css">
     <link href=".\css\style.css" rel="stylesheet" type="text/css">
-    <link href=".\css\Admin.css" rel="stylesheet" type="text/css">
+   @* <link href=".\css\Admin.css" rel="stylesheet" type="text/css">*@
 
 </head>
 
@@ -87,7 +87,7 @@
                             <a class="waves-effect"  asp-controller="Home" asp-action="Index"><i class="fas fa-book-open"></i> <span> Sách </span> <span class="float-right"><i class="mdi mdi-plus"></i></span></a>
                             <ul class="list-unstyled">
                                 <li><a >Xem danh sách sách</a></li>
-                                <li><a href="/themsach.html">Thêm sách</a></li>
+                                <li><a asp-controller="Admin" asp-action="ThemSach">Thêm sách</a></li>
                                 <li><a href="/capnhat_sach.html">Cập nhật thông tin sách</a></li>
                             </ul>
                         </li>
@@ -172,7 +172,6 @@
                                                     <th>SL tồn</th>
                                                     <th>SL bán</th>
                                                     <th>Khu vực</th>
-                                                    <th>Ngôn ngữ</th>
                                                     <th>Hành động</th>
                                                 </tr>
                                             </thead>
@@ -192,17 +191,17 @@
                                                     <td>@item.Soluong</td>
                                                     <td>0</td>
                                                     <td>Việt Nam</td>
-                                                    <td>@item.Ngonngu</td>
+                                                    
                                                     <td style="display: flex;">
 
                                                         <span class="btn btn-primary" style=" justify-content: center;">
-                                                            <a href="/Admin/CapNhat_Sach?Masach=@item.Masach">
+                                                            <a style=" color:white" href="/Admin/CapNhat_Sach?Masach=@item.Masach&Tensach=@item.Tensach&Hinhanh=@item.Hinhanh&Theloai=@item.Theloai&Tacgia=@item.Tacgia&Nxb=@item.Nxb&Soluong=@item.Soluong">
                                                                 Sửa
                                                             </a>
                                                         
                                                         </span>
                                                         <span class="btn btn-danger" style=" justify-content: center;">
-                                                            <a href="/Admin/DeleteBook?Masach=@item.Masach">
+                                                            <a style=" color:white" href="/Admin/DeleteBook?Masach=@item.Masach">
                                                                 Xóa
                                                             </a>
                                                         

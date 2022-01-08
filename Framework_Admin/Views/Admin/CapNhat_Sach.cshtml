@@ -145,7 +145,7 @@
 
                                             <div class="card-body">
                                                 <h4 class="m-t-0 m-b-30">Điền thông tin sách</h4>
-                                                @model books
+                                               
                                                 @{
                                                     <div class="row">
                                                         <div class="col-sm-6 col-xs-12">
@@ -154,25 +154,25 @@
                                                                 @*  <form class="" action="#">*@
                                                                 <div class="form-group">
                                                                     <label>Mã sách</label>
-                                                                    <input type="text" class="form-control" required="" placeholder="" name="Masach" value="@Model.Masach"/>
+                                                                    <input type="text" class="form-control" required="" placeholder="" name="Masach" value="@ViewBag.Masach"/>
                                                                 </div>
                                                                 
                                                                 <div class="form-group">
                                                                     <label>Hình ảnh</label>
                                                                     <div>
-                                                                        <input parsley-type="url" type="url" class="form-control" required="" name="Hinhanh" value="@Model.Hinhanh" placeholder="URL">
+                                                                        <input parsley-type="url" type="url" class="form-control" required="" name="Hinhanh" value="@ViewBag.Hinhanh" placeholder="URL">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label>Tên sách</label>
                                                                     <div>
-                                                                        <input data-parsley-type="digits" type="text" class="form-control" required="" name="Tensach" placeholder="Tên sách" value="@Model.Tensach">
+                                                                        <input data-parsley-type="digits" type="text" class="form-control" required="" name="Tensach" placeholder="Tên sách" value="@ViewBag.Tensach">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group ">
                                                                     <label>Thể loại</label>
                                                                     <select name="Theloai" class="form-control">
-                                                                        <option>@Model.Theloai</option>
+                                                                        <option>@ViewBag.Theloai</option>
                                                                         <option>2</option>
                                                                         <option>3</option>
                                                                         <option>4</option>
@@ -183,13 +183,13 @@
                                                                 <div class="form-group">
                                                                     <label>Tác giả</label>
                                                                     <div>
-                                                                        <input data-parsley-type="alphanum" type="text" class="form-control" required="" name="Tacgia" placeholder="Tác giả" value="@Model.Tacgia">
+                                                                        <input data-parsley-type="alphanum" type="text" class="form-control" required="" name="Tacgia" placeholder="Tác giả" value="@ViewBag.Tacgia">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label>Nội dung</label>
                                                                     <div>
-                                                                        <textarea required="" class="form-control" name="Mota" rows="5">@Model.Mota</textarea>
+                                                                        <textarea required="" class="form-control" name="Mota" rows="5">Mota</textarea>
                                                                     </div>
                                                                 </div>
 
@@ -205,27 +205,27 @@
                                                                 <div class="form-group">
                                                                     <label>Nhà xuất bản</label>
                                                                     <div>
-                                                                        <input data-parsley-type="alphanum" type="text" class="form-control" required="" placeholder="Nhà xuất bản" name="Nxb" value="@Model.Nxb">
+                                                                        <input data-parsley-type="alphanum" type="text" class="form-control" required="" placeholder="Nhà xuất bản" name="Nxb" value="@ViewBag.Nxb">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label>Năm xuất bản</label>
                                                                     <div>
-                                                                        <input data-parsley-type="alphanum" type="text" class="form-control" required="" placeholder="Năm xuất bản" name="Namxb" value="@Model.Namxb">
+                                                                        <input data-parsley-type="alphanum" type="text" class="form-control" required="" placeholder="Năm xuất bản" name="Namxb" value="Namxb">
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label>Số lượng</label>
                                                                     <div>
-                                                                        <input data-parsley-type="number" type="text" class="form-control" required="" placeholder="Số lượng sách" name="Soluong" value="@Model.Soluong">
+                                                                        <input data-parsley-type="number" type="text" class="form-control" required="" placeholder="Số lượng sách" name="Soluong" value="@ViewBag.Soluong">
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="form-group">
                                                                     <label>Phần trăm giảm</label>
                                                                     <div>
-                                                                        <input data-parsley-type="number" type="text" class="form-control" required="" placeholder="Phần trăm giảm" name="Giamgia" value="@Model.Giamgia">
+                                                                        <input data-parsley-type="number" type="text" class="form-control" required="" placeholder="Phần trăm giảm" name="Giamgia" value="Giamgia">
                                                                     </div>
                                                                 </div>
 
@@ -246,7 +246,7 @@
                                                                 <div class="form-group" style="margin-top: 17px;">
                                                                     <label>Giá bán</label>
                                                                     <div>
-                                                                        <input data-parsley-type="alphanum" type="text" class="form-control" required="" name="Giaban" placeholder="Giá bán" value="@Model.Giaban">
+                                                                        <input data-parsley-type="alphanum" type="text" class="form-control" required="" name="Giaban" placeholder="Giá bán" value="Giaban">
                                                                     </div>
                                                                 </div>
 
