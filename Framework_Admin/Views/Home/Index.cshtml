@@ -1,8 +1,6 @@
 ﻿
-@model IEnumerable<Framework_Admin.Models.books>
-@{
-    ViewData["Title"] = "Admin";
-}
+@model List<object>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -180,28 +178,28 @@
                                                 {
                                                 <tr>
          
-                                                    <td>@item.Masach</td>
-                                                    <td class="name__list-book">@item.Tensach</td>
-                                                    <td><img class="img__list-book" src="@item.Hinhanh" alt=""></td>
-                                                    <td>@item.Theloai</td>
-                                                    <td>@item.Tacgia</td>
-                                                    <td>@item.Nxb</td>
-                                                    <td>@item.Giaban</td>
-                                                    <td>@item.Namxb</td>
-                                                    <td>@item.Soluong</td>
-                                                    <td>0</td>
+                                                    <td>@item.GetType().GetProperty("Masach").GetValue(item,null)</td>
+                                                    <td class="name__list-book">@item.GetType().GetProperty("Tensach").GetValue(item, null)</td>
+                                                    <td><img class="img__list-book" src="@item.GetType().GetProperty("Hinhanh").GetValue(item,null)" alt=""></td>
+                                                    <td>@item.GetType().GetProperty("Theloai").GetValue(item, null)</td>
+                                                    <td>@item.GetType().GetProperty("Tacgia").GetValue(item, null)</td>
+                                                    <td>@item.GetType().GetProperty("Nxb").GetValue(item, null)</td>
+                                                    <td>@item.GetType().GetProperty("Giaban").GetValue(item, null)</td>
+                                                    <td>@item.GetType().GetProperty("Namxb").GetValue(item, null)</td>
+                                                    <td>@item.GetType().GetProperty("Soluong").GetValue(item, null)</td>
+                                                    <td>@item.GetType().GetProperty("Soluongban").GetValue(item, null)</td>
                                                     <td>Việt Nam</td>
                                                     
                                                     <td style="display: flex;">
 
-                                                        <span class="btn btn-primary" style=" justify-content: center;">
-                                                            <a style=" color:white" href="/Admin/CapNhat_Sach?Masach=@item.Masach&Tensach=@item.Tensach&Hinhanh=@item.Hinhanh&Theloai=@item.Theloai&Tacgia=@item.Tacgia&Nxb=@item.Nxb&Soluong=@item.Soluong">
+                                                        <span class="btn btn-primary" style="justify-content: center;">
+                                                            <a style=" color:white" href="/Admin/CapNhat_Sach?Id=@item.GetType().GetProperty("Masach").GetValue(item, null)">
                                                                 Sửa
                                                             </a>
                                                         
                                                         </span>
-                                                        <span class="btn btn-danger" style=" justify-content: center;">
-                                                            <a style=" color:white" href="/Admin/DeleteBook?Masach=@item.Masach">
+                                                        <span class="btn btn-danger" style="justify-content: center;">
+                                                            <a style=" color:white" href="/Admin/DeleteBook?Id=@item.GetType().GetProperty("Masach").GetValue(item, null)">
                                                                 Xóa
                                                             </a>
                                                         

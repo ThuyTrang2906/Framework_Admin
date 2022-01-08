@@ -202,7 +202,7 @@
                                                     <td>@item.GetType().GetProperty("Email").GetValue(item, null)</td>
                                                     <td>@item.GetType().GetProperty("Tinhtrang").GetValue(item, null)</td>
                                                     <td>
-                                                        <a class="btn btn-danger" href="/Admin/KhoaTaiKhoan?Matk=@item.GetType().GetProperty("Matk").GetValue(item, null) style="display: flex; justify-content: center;">Khóa</a>
+                                                        <a class="btn btn-danger" href="/Admin/KhoaTaiKhoan?Matk=@item.GetType().GetProperty("Matk").GetValue(item, null)" style="display: flex; justify-content: center;">Khóa</a>
                                                         <br />
                                                         <a class="btn btn-danger" href="/Admin/MoTaiKhoan?Matk=@item.GetType().GetProperty("Matk").GetValue(item, null)" style="display: flex; justify-content: center;"> Mở Khóa</a>
                                                     </td>

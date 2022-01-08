@@ -21,20 +21,16 @@ namespace Framework_Admin.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 
 
-        public IActionResult CapNhat_Sach(string id1,string id2, string id3, string id4, string id5, string id6, string id7)
+        public IActionResult CapNhat_Sach(int Id)
         {
-           // books viewbook = new books();//.GetBookById(id1, id2, id3, id4, id5, id6, id7);
-            ViewBag.Masach = id1;
-            ViewBag.Tensach = id2;
-            ViewBag.Hinhanh = id3;
-            ViewBag.Theloai = id4;
-            ViewBag.Tacgia = id5;
-            ViewBag.Nxb = id6;
-            ViewBag.Soluong = id7;
+           
+            ViewBag.Book = _storeContext.GetBookById(Id);
+           // ViewBag.SLBan = _storeContext.GetSLBan(Id); 
             return View();
         }
         public IActionResult ThemSach()
@@ -43,9 +39,12 @@ namespace Framework_Admin.Controllers
         }
         public IActionResult InsertBook(books bk)
         {
-            int count = _storeContext.InsertBook(bk);
-
-            return RedirectToAction("Index", "Home");
+             int count = _storeContext.InsertBook(bk);
+            if (count > 0)
+                ViewData["thongbao"] = "thêm thành công";
+            else
+                ViewData["thongbao"] = "thêm không thành công";
+            return View();
 
         }
         public IActionResult UpdateById(books book)
@@ -54,15 +53,11 @@ namespace Framework_Admin.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult DeleteBook(string Id)
+        public IActionResult DeleteBook(int Id)
         {
-            // ViewData["id"] = Id;
-            int count = _storeContext.XoaSach(Id);
-            /*if (count > 0)
-                ViewData["thongbao"] = "Xóa thành công";
-            else
-                ViewData["thongbao"] = "Xóa không thành công";*/
+            _storeContext.XoaSach(Id);
             return RedirectToAction("Index", "Home");
+
         }
 
 
