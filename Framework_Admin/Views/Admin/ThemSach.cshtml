@@ -131,20 +131,20 @@
                 </div>
 
                 <div class="page-content-wrapper ">
+                    <form class="" action="/Admin/InsertBook" method="post">
 
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="card">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
 
-                                    <div class="card-body">
-                                        <h4 class="m-t-0 m-b-30">Nhập thông tin sách</h4>
+                                        <div class="card-body">
+                                            <h4 class="m-t-0 m-b-30">Nhập thông tin sách</h4>
 
-                                        <div class="row">
-                                            <div class="col-sm-6 col-xs-12">
+                                            <div class="row">
+                                                <div class="col-sm-6 col-xs-12">
 
-                                                <div class="m-t-20">
-                                                    <form class="" action="/Admin/InsertBook" method="post">
+                                                    <div class="m-t-20">
                                                         <div class="form-group">
                                                             <label>Nhập mã sách</label>
                                                             <input type="text" class="form-control" required="" placeholder="Mã sách" name="masach">
@@ -197,18 +197,16 @@
                                                         <div class="form-group">
                                                             <label>Nhập nội dung</label>
                                                             <div>
-                                                                <textarea required="" class="form-control" rows="5" name="noidung"></textarea>
+                                                                <textarea required="" class="form-control" rows="5" name="mota"></textarea>
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                    </div>
+
                                                 </div>
 
-                                            </div>
+                                                <div class="col-sm-6 col-xs-12">
 
-                                            <div class="col-sm-6 col-xs-12">
-
-                                                <div class="m-t-20">
-                                                    <form action="#">
+                                                    <div class="m-t-20">
                                                         <div class="form-group">
                                                             <label>Nhập nhà xuất bản</label>
                                                             <div>
@@ -236,12 +234,26 @@
                                                             </div>
                                                         </div>
 
-                                                     
+
 
                                                         <div class="form-group" style="margin-top: 17px;">
                                                             <label>Nhập giá bán</label>
                                                             <div>
                                                                 <input data-parsley-type="alphanum" type="text" class="form-control" required="" placeholder="Giá bán" name="giaban">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group" style="margin-top: 17px;">
+                                                            <label>Nhập giá vốn</label>
+                                                            <div>
+                                                                <input data-parsley-type="alphanum" type="text" class="form-control" required="" placeholder="Giá vốn" name="giagoc">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group" style="margin-top: 17px;">
+                                                            <label>Nhập hình thức</label>
+                                                            <div>
+                                                                <input data-parsley-type="alphanum" type="text" class="form-control" required="" placeholder=" Bìa mềm" name="hinhthuc">
                                                             </div>
                                                         </div>
 
@@ -255,22 +267,22 @@
                                                                 </button>
                                                             </div>
                                                         </div>
-                                                    </form>
+
+                                                    </div>
+
                                                 </div>
 
                                             </div>
-
+                                            <!-- end row -->
                                         </div>
-                                        <!-- end row -->
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- end row -->
+                            <!-- end row -->
 
-                    </div><!-- container-fluid -->
-
+                        </div><!-- container-fluid -->
+                    </form>
                 </div> <!-- Page content Wrapper -->
 
             </div> <!-- content -->

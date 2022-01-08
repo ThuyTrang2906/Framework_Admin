@@ -39,12 +39,9 @@ namespace Framework_Admin.Controllers
         }
         public IActionResult InsertBook(books bk)
         {
-             int count = _storeContext.InsertBook(bk);
-            if (count > 0)
-                ViewData["thongbao"] = "thêm thành công";
-            else
-                ViewData["thongbao"] = "thêm không thành công";
-            return View();
+             _storeContext.InsertBook(bk);
+
+            return RedirectToAction("Index", "Home");
 
         }
         public IActionResult UpdateById(books book)
@@ -111,14 +108,15 @@ namespace Framework_Admin.Controllers
         {
             ViewBag.listDonHang = _storeContext.GetDonHang();
             ViewBag.listaccount = _storeContext.GetAccount();
+            
             return View();
         }
 
-        public IActionResult VanChuyen(string Id)
+        public IActionResult VanChuyen(int Madh, int Matk)
         {
-            orders kh = _storeContext.ViewDonHang(Id);
-            ViewBag.listaccount = _storeContext.GetAccount();
-            ViewData.Model = kh;
+            ViewBag.listDonHang = _storeContext.ViewDonHang(Madh);          
+            ViewBag.listaccount = _storeContext.GetAccountById(Matk);
+            ViewBag.listbook = _storeContext.GetObject_Book(Madh);
             return View();
         }
     }

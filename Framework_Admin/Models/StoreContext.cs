@@ -67,6 +67,44 @@ namespace Framework_Admin.Models
             return list;
         }
 
+
+        public List<object> GetObject_Book(int Id)
+        {
+            List<object> list = new List<object>();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = "select o.masach,giaban, o.soluong, madh  from booklist s, detail_order o where s.masach=o.masach and o.madh=@Madh";
+
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("Madh", Id);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var ob = new
+                        {
+                            Masach = Convert.ToInt32(reader["masach"]),
+                            Giaban = Convert.ToInt32(reader["giaban"]),                    
+                            Soluong = Convert.ToInt32(reader["soluong"]),
+                            Madh = Convert.ToInt32(reader["Madh"]),
+
+                        };
+                        list.Add(ob);
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return list;
+        }
+
+
+
         public int InsertBook(books bk)
         {
             using(MySqlConnection conn = GetConnection())
@@ -210,6 +248,48 @@ namespace Framework_Admin.Models
                 conn.Open();
                 string str = "select * from client_accounts";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new client_accounts_framework()
+                        {
+                            Diachi = reader["diachi"].ToString(),
+                            Matk = Convert.ToInt32(reader["matk"]),
+                            Diem = Convert.ToInt32(reader["diem"]),
+                            Sl_giohang = Convert.ToInt32(reader["sl_giohang"]),
+                            Email = reader["email"].ToString(),
+                            Gioitinh = reader["gioitinh"].ToString(),
+                            Hoten = reader["hoten"].ToString(),
+                            Tentk = reader["tentk"].ToString(),
+                            Matkhau = reader["matkhau"].ToString(),
+                            Ngaytao = Convert.ToDateTime(reader["ngaytao"]),
+                            Tinhtrang = reader["tinhtrang"].ToString(),
+                            Sodt = reader["sodt"].ToString(),
+                            Ngaysinh = Convert.ToDateTime(reader["ngaysinh"]),
+
+
+                        });
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return list;
+        }
+
+        public List<client_accounts_framework> GetAccountById(int Id)
+        {
+            List<client_accounts_framework> list = new List<client_accounts_framework>();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = "select * from client_accounts where matk=@matk";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("matk", Id);
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -435,7 +515,7 @@ namespace Framework_Admin.Models
             return list;
         }
 
-        public orders ViewDonHang(string Id)
+        public orders ViewDonHang(int Id)
         {
             orders kh = new orders();
             using (MySqlConnection conn = GetConnection())
