@@ -97,10 +97,37 @@ namespace Framework_Admin.Controllers
 
         }
 
-        public IActionResult CapNhat_KM(string Id)
+        public IActionResult CapNhat_KM(int Id)
         {
-            return View(_storeContext.GetKhuyenMaiById(Id));
+            ViewBag.khuyenmai=_storeContext.GetKhuyenMaiById(Id);
+            return View();
+
         }
+
+        public IActionResult UpdateKhuyenMaiById(khuyenmais km)
+        {
+            _storeContext.UpdateKhuyenMaiById(km);
+            return RedirectToAction("DS_KhuyenMai", "Admin");
+        }
+
+        public IActionResult Xoa_KM(int Id)
+        {
+            _storeContext.XoaKhuyenMai(Id);
+            return RedirectToAction("DS_KhuyenMai", "Admin");
+
+        }
+
+        public IActionResult Them_KM()
+        {
+            return View();
+        }
+        public IActionResult InsertKhuyenmai(khuyenmais bk)
+        {
+            _storeContext.InsertKhuyenmai(bk);
+            return RedirectToAction("DS_KhuyenMai", "Admin");
+
+        }
+
 
         // ĐƠN HÀNG
 
@@ -117,6 +144,7 @@ namespace Framework_Admin.Controllers
             ViewBag.listDonHang = _storeContext.ViewDonHang(Madh);          
             ViewBag.listaccount = _storeContext.GetAccountById(Matk);
             ViewBag.listbook = _storeContext.GetObject_Book(Madh);
+            ViewBag.ThanhTien = _storeContext.TinhThanhTien(Madh);
             return View();
         }
     }

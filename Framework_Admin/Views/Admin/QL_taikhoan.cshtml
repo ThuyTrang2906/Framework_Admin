@@ -90,7 +90,6 @@
                             <ul class="list-unstyled">
                                 <li><a href="/xemds_sach.html">Xem danh sách sách</a></li>
                                 <li><a href="/themsach.html">Thêm sách</a></li>
-                                <li><a href="/capnhat_sach.html">Cập nhật thông tin sách</a></li>
                             </ul>
                         </li>
 
@@ -113,7 +112,6 @@
                             <ul class="list-unstyled">
                                 <li><a href="/DS_khuyenmai.html">Danh sách khuyến mãi</a></li>
                                 <li><a href="/them_km.html">Thêm khuyến mãi</a></li>
-                                <li><a href="/capnhat_km.html">Cập nhật thông tin khuyến mãi</a></li>
                             </ul>
                         </li>
 
@@ -204,7 +202,7 @@
                                                     <td>
                                                         <a class="btn btn-danger" href="/Admin/KhoaTaiKhoan?Matk=@item.GetType().GetProperty("Matk").GetValue(item, null)" style="display: flex; justify-content: center;">Khóa</a>
                                                         <br />
-                                                        <a class="btn btn-danger" href="/Admin/MoTaiKhoan?Matk=@item.GetType().GetProperty("Matk").GetValue(item, null)" style="display: flex; justify-content: center;"> Mở Khóa</a>
+                                                        <a class="btn btn-danger" href="/Admin/MoTaiKhoan?Matk=@item.GetType().GetProperty("Matk").GetValue(item, null)" style="display: flex; justify-content: center; background-color:'04A2B3';"> Mở Khóa</a>
                                                     </td>
                                                     </tr>
                                                 }

@@ -74,9 +74,7 @@
                             <a href="javascript:void(0);" class="waves-effect"><i class="fas fa-book-open"></i> <span> Sách </span> <span class="float-right"><i class="mdi mdi-plus"></i></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="/xemds_sach.html">Xem danh sách sách</a></li>
-                                <li><a href="/themsach.html">Thêm sách</a></li>
-                                <li><a href="/capnhat_sach.html">Cập nhật thông tin sách</a></li>
-                            </ul>
+                                <li><a href="/themsach.html">Thêm sách</a></li>                            </ul>
                         </li>
 
                         <li class="has_sub">
@@ -98,7 +96,6 @@
                             <ul class="list-unstyled">
                                 <li><a href="/DS_khuyenmai.html">Danh sách khuyến mãi</a></li>
                                 <li><a href="/them_km.html">Thêm khuyến mãi</a></li>
-                                <li><a href="/capnhat_km.html">Cập nhật thông tin khuyến mãi</a></li>
                             </ul>
                         </li>
 
@@ -217,61 +214,73 @@
                                                             <table class="table">
                                                                 <thead>
                                                                     <tr>
-                                                                        <td><strong>Mã sách</strong></td>
-                                                                        <td class="text-center"><strong>Đơn giá</strong></td>
+                                                                        <td><strong style="color:white">Mã sách</strong></td>
+                                                                        <td class="text-center" ><strong style="color:white">Đơn giá</strong></td>
                                                                         <td class="text-center">
-                                                                            <strong>Số lượng</strong>
+                                                                            <strong  style="color:white">Số lượng</strong>
                                                                         </td>
-                                                                        <td class="text-right"><strong>Thành tiền</strong></td>
+                                                                        <td class="text-right" ><strong  style="color:white">Thành tiền</strong></td>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <!-- foreach ($order->lineItems as $line) or some such thing here -->
                                                                     @foreach (var item in ViewBag.listbook)
-                                                                        {
-                                                                        @if (@item.GetType().GetProperty("Madh").GetValue(item, null)== @ViewBag.listDonHang.Madh)
+                                                                    {
+                                                                        @if (@item.GetType().GetProperty("Madh").GetValue(item, null) == @ViewBag.listDonHang.Madh)
                                                                         {
                                                                             <tr>
                                                                                 <td>@item.GetType().GetProperty("Masach").GetValue(item, null)</td>
                                                                                 <td class="text-center">@item.GetType().GetProperty("Giaban").GetValue(item, null) đ</td>
                                                                                 <td class="text-center">@item.GetType().GetProperty("Soluong").GetValue(item, null)</td>
-                                                                                <td class="text-right">197.000 đ</td>
+                                                                                <td class="text-right">@item.GetType().GetProperty("thanhtien").GetValue(item, null)</td>
+
                                                                             </tr>
                                                                         }
-                                                                        
+
                                                                     }
-                                                                        <tr>
-                                                                            <td class="thick-line"></td>
-                                                                            <td class="thick-line"></td>
-                                                                            <td class="thick-line text-center">
-                                                                                <strong>Tạm tính</strong>
-                                                                            </td>
-                                                                            <td class="thick-line text-right">566.000 đ</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td class="no-line"></td>
-                                                                            <td class="no-line"></td>
-                                                                            <td class="no-line text-center">
-                                                                                <strong>Phí vận chuyển</strong>
-                                                                            </td>
-                                                                            <td class="no-line text-right">40.000 đ</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td class="no-line"></td>
-                                                                            <td class="no-line"></td>
-                                                                            <td class="no-line text-center">
-                                                                                <strong>Tổng</strong>
-                                                                            </td>
-                                                                            <td class="no-line text-right"><h4 class="m-0">604.000 đ</h4></td>
-                                                                        </tr>
-                                                                    </tbody>
+
+                                                                            <tr>
+                                                                                <td class="thick-line"></td>
+                                                                                <td class="thick-line"></td>
+                                                                                <td class="thick-line text-center">
+                                                                                    <strong>Tạm tính</strong>
+                                                                                </td>
+
+                                                                                <td class="thick-line text-right">@ViewBag.listDonHang.Tongtien đ</td>
+
+                                                                            </tr>
+
+                                                                   
+                                                                            <tr>
+                                                                                <td class="no-line"></td>
+                                                                                <td class="no-line"></td>
+                                                                                <td class="no-line text-center">
+                                                                                    <strong>Phí vận chuyển</strong>
+                                                                                </td>
+
+                                                                                <td class="no-line text-right">@ViewBag.listDonHang.Tienship đ</td>
+
+                                                                            </tr>
+                                                                        
+
+                                                                    
+                                                                    <tr>
+                                                                        <td class="no-line"></td>
+                                                                        <td class="no-line"></td>
+                                                                        <td class="no-line text-center">
+                                                                            <strong>Tổng</strong>
+                                                                        </td>
+                                                                        <td class="no-line text-right"><h4 class="m-0">@ViewBag.ThanhTien đ</h4></td>
+                                                                    </tr>
+
+                                                                </tbody>
                                                             </table>
                                                         </div>
 
                                                         <div class="d-print-none">
                                                             <div class="float-right">
                                                                 <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light"><i class="fa fa-print"></i></a>
-                                                                <a href="#" class="btn btn-primary waves-effect waves-light">Đang vận chuyển</a>
+                                                                <a href="#" class="btn btn-primary waves-effect waves-light">@ViewBag.listDonHang.Tinhtrangdonhang</a>
                                                             </div>
                                                         </div>
                                                     </div>

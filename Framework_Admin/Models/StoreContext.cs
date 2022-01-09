@@ -68,40 +68,7 @@ namespace Framework_Admin.Models
         }
 
 
-        public List<object> GetObject_Book(int Id)
-        {
-            List<object> list = new List<object>();
-
-            using (MySqlConnection conn = GetConnection())
-            {
-                conn.Open();
-                string str = "select o.masach,giaban, o.soluong, madh  from booklist s, detail_order o where s.masach=o.masach and o.madh=@Madh";
-
-                MySqlCommand cmd = new MySqlCommand(str, conn);
-                cmd.Parameters.AddWithValue("Madh", Id);
-
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        var ob = new
-                        {
-                            Masach = Convert.ToInt32(reader["masach"]),
-                            Giaban = Convert.ToInt32(reader["giaban"]),                    
-                            Soluong = Convert.ToInt32(reader["soluong"]),
-                            Madh = Convert.ToInt32(reader["Madh"]),
-
-                        };
-                        list.Add(ob);
-                    }
-                    reader.Close();
-                }
-
-                conn.Close();
-
-            }
-            return list;
-        }
+       
 
 
 
@@ -430,7 +397,7 @@ namespace Framework_Admin.Models
             return list;
         }
 
-        public khuyenmais GetKhuyenMaiById(string id)
+        public khuyenmais GetKhuyenMaiById(int id)
         {
             khuyenmais list = new khuyenmais();
 
@@ -441,35 +408,91 @@ namespace Framework_Admin.Models
 
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 cmd.Parameters.AddWithValue("makm", id);
+
                 using (var reader = cmd.ExecuteReader())
                 {
-                    while (reader.Read())
+                    if (reader.Read())
                     {
-                        list = new khuyenmais()
-                        {
-                            Img = reader["img"].ToString(),
-                            Daluu = Convert.ToInt32(reader["daluu"]),
-                            Dieukien = Convert.ToInt32(reader["dieukien"]),
-                            Makm = Convert.ToInt32(reader["makm"]),
-                            Phantram = Convert.ToInt32(reader["phantram"]),
-                            Sl = Convert.ToInt32(reader["sl"]),
-                            Loai = reader["loai"].ToString(),
-                            Manhap = reader["manhap"].ToString(),
-                            Noidung = reader["noidung"].ToString(),
+                        list.Daluu = Convert.ToInt32(reader["daluu"]);
+                        list.Dieukien = Convert.ToInt32(reader["dieukien"]);
+                        list.Makm = Convert.ToInt32(reader["makm"]);
+                        list.Phantram = Convert.ToInt32(reader["phantram"]);
+                        list.Sl = Convert.ToInt32(reader["sl"]);
+                        list.Loai = reader["loai"].ToString();
+                        list.Manhap = reader["manhap"].ToString();
+                        list.Noidung = reader["noidung"].ToString();
+                        list.Img = reader["img"].ToString();
 
-                            Ngaybd = Convert.ToDateTime(reader["ngaybd"]),
-                            Ngaykt = Convert.ToDateTime(reader["ngaykt"]),
-
-                        };
+                        list.Ngaybd = Convert.ToDateTime(reader["ngaybd"]);
+                        list.Ngaykt = Convert.ToDateTime(reader["ngaykt"]);
                     }
-                    reader.Close();
-                }
-
-                conn.Close();
+                    
+                    };
+                return list;
 
             }
-            return list;
         }
+
+        public int UpdateKhuyenMaiById(khuyenmais kh)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+
+                conn.Open();
+                var str = "UPDATE  khuyenmais SET daluu=@daluu,dieukien=@dieukien,img=@img,loai=@loai," +
+                    "manhap=@manhap,ngaybd=@ngaybd,ngaykt=@ngaykt,noidung=@noidung,phantram=@phantram,sl=@sl," +
+                    " WHERE makm=@makm";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("daluu", kh.Daluu);
+                cmd.Parameters.AddWithValue("dieukien", kh.Dieukien);
+                cmd.Parameters.AddWithValue("img", kh.Img);
+                cmd.Parameters.AddWithValue("loai", kh.Loai);
+                cmd.Parameters.AddWithValue("manhap", kh.Manhap);
+                cmd.Parameters.AddWithValue("ngaybd", kh.Ngaybd);
+                cmd.Parameters.AddWithValue("ngaykt", kh.Ngaykt);
+                cmd.Parameters.AddWithValue("phantram", kh.Phantram);
+                cmd.Parameters.AddWithValue("sl", kh.Sl);
+                cmd.Parameters.AddWithValue("noidung", kh.Noidung);
+                
+                return (cmd.ExecuteNonQuery());
+            }
+        }
+
+        public int XoaKhuyenMai(int Id)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                var str = "delete from khuyenmais where makm=@Makm";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("Makm", Id);
+                return (cmd.ExecuteNonQuery());
+            }
+        }
+
+        public int InsertKhuyenmai(khuyenmais bk)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = "INSERT INTO khuyenmais values(@daluu, @dieukien, @img, @loai, @makm, @manhap, @ngaybd, @ngaykt, @noidung,@phantram, @sl )";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("daluu", bk.Daluu);
+                cmd.Parameters.AddWithValue("dieukien", bk.Dieukien);
+                cmd.Parameters.AddWithValue("img", bk.Img);
+                cmd.Parameters.AddWithValue("loai", bk.Loai);
+                cmd.Parameters.AddWithValue("makm", bk.Makm);
+                cmd.Parameters.AddWithValue("manhap", bk.Manhap);
+                cmd.Parameters.AddWithValue("ngaybd", bk.Ngaybd);
+                cmd.Parameters.AddWithValue("ngaykt", bk.Ngaykt);
+                cmd.Parameters.AddWithValue("noidung", bk.Noidung);
+                cmd.Parameters.AddWithValue("phantram", bk.Phantram);
+                cmd.Parameters.AddWithValue("sl", bk.Sl);
+                return cmd.ExecuteNonQuery();
+            }
+        }
+
+
 
         //Quản lý đơn hàng'
 
@@ -552,6 +575,73 @@ namespace Framework_Admin.Models
             }
             return (kh);
         }
+
+        public List<object> GetObject_Book(int Id)
+        {
+            List<object> list = new List<object>();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = "select o.masach,tongtien, giaban, o.soluong, o.madh, tienship from booklist s, detail_order o, orders where s.masach=o.masach and orders.madh=o.madh and o.madh=@Madh";
+                int thanhtien = 0;
+                int sll = 0;
+                int gb = 0;
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("Madh", Id);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var ob = new
+                        {
+                            Masach = Convert.ToInt32(reader["masach"]),
+                            Giaban = Convert.ToInt32(reader["giaban"]),
+                            Soluong = Convert.ToInt32(reader["soluong"]),
+                            Tongtien = Convert.ToInt32(reader["tongtien"]),
+                            Madh = Convert.ToInt32(reader["madh"]),
+                            Tienship = Convert.ToInt32(reader["tienship"]),
+                            thanhtien = Convert.ToInt32(reader["soluong"])* Convert.ToInt32(reader["giaban"]),
+                    };
+                        list.Add(ob);
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return list;
+        }
+
+        public int TinhThanhTien(int Madh)
+        {
+            using(MySqlConnection conn = GetConnection())
+            {
+                int thanhtien = 0; 
+                int Tongtien = 0;
+                int Tienship = 0;
+                conn.Open();
+                string str = "SELECT tongtien, tienship  from booklist b, detail_order o, orders where b.masach=o.masach and o.madh=orders.madh and o.madh=@madh";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("madh", Madh);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        reader.Read();
+                        Tongtien = Convert.ToInt32(reader["tongtien"]);
+                        Tienship = Convert.ToInt32(reader["tienship"]);
+                        thanhtien = Tongtien - Tienship;
+                    }
+                }
+                return thanhtien;
+
+            }
+        }
+
+       
 
     }
 }

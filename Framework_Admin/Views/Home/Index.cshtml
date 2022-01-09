@@ -86,7 +86,6 @@
                             <ul class="list-unstyled">
                                 <li><a >Xem danh sách sách</a></li>
                                 <li><a asp-controller="Admin" asp-action="ThemSach">Thêm sách</a></li>
-                                <li><a href="/capnhat_sach.html">Cập nhật thông tin sách</a></li>
                             </ul>
                         </li>
 
@@ -108,8 +107,7 @@
                             <a  class="waves-effect"><i class="fas fa-piggy-bank"></i><span> Khuyến mãi </span><span class="float-right"><i class="mdi mdi-plus"></i></span></a>
                             <ul class="list-unstyled">
                                 <li><a asp-controller="Admin" asp-action="DS_KhuyenMai">Danh sách khuyến mãi</a></li>
-                                <li><a href="/them_km.html">Thêm khuyến mãi</a></li>
-                                <li><a href="/capnhat_km.html">Cập nhật thông tin khuyến mãi</a></li>
+                                <li><a asp-controller="Admin" asp-action="Them_KM">Thêm khuyến mãi</a></li>
                             </ul>
                         </li>
 
@@ -198,12 +196,7 @@
                                                             </a>
                                                         
                                                         </span>
-                                                        <span class="btn btn-danger" style="justify-content: center;">
-                                                            <a style=" color:white" href="/Admin/DeleteBook?Id=@item.GetType().GetProperty("Masach").GetValue(item, null)">
-                                                                Xóa
-                                                            </a>
                                                         
-                                                        </span>
                                                     </td>
                                                 </tr>
                                                  }

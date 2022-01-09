@@ -86,7 +86,6 @@
                             <ul class="list-unstyled">
                                 <li><a href="/xemds_sach.html">Xem danh sách sách</a></li>
                                 <li><a href="/themsach.html">Thêm sách</a></li>
-                                <li><a href="/capnhat_sach.html">Cập nhật thông tin sách</a></li>
                             </ul>
                         </li>
 
@@ -109,7 +108,6 @@
                             <ul class="list-unstyled">
                                 <li><a href="/DS_khuyenmai.html">Danh sách khuyến mãi</a></li>
                                 <li><a href="/them_km.html">Thêm khuyến mãi</a></li>
-                                <li><a href="/capnhat_km.html">Cập nhật thông tin khuyến mãi</a></li>
                             </ul>
                         </li>
 
@@ -179,10 +177,10 @@
                                                         <td>chưa nhập</td>
                                                         <td>@item.Ngaybd</td>
                                                         <td>@item.Ngaykt</td>
-                                                        <td>Đã kết thúc</td>
+                                                        <td>CHƯA LÀM</td>
                                                         <td style="display: flex;">
-                                                            <a href="/Admin/CapNhat_KM?Makm=@item.Makm" class="btn btn-primary" style=" justify-content: center;">Sửa</a>
-                                                            <span class="btn btn-danger" style=" justify-content: center;">Xóa</span>
+                                                            <a href="/Admin/CapNhat_KM?Id=@item.Makm" class="btn btn-primary" style=" justify-content: center;">Sửa</a>
+                                                            <a href="/Admin/Xoa_KM?Id=@item.Makm" class="btn btn-danger" style=" justify-content: center;">Xóa</a>
                                                         </td>
                                                     </tr>
                                                 }
