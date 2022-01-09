@@ -49,7 +49,7 @@ namespace Framework_Admin.Models
                             Nxb = reader["nxb"].ToString(),
                             Sobinhchon = reader["sobinhchon"].ToString(),
                             Tacgia = reader["tacgia"].ToString(),
-                            Namxb = Convert.ToDateTime(reader["namxb"]),
+                            Namxb = Convert.ToDateTime(reader["namxb"]),    
 
                             Tensach = reader["tensach"].ToString(),
                             Theloai = reader["theloai"].ToString(),
@@ -607,7 +607,7 @@ namespace Framework_Admin.Models
                     reader.Close();
                 }
 
-                conn.Close();
+                conn.Close();   
 
             }
             return list;
@@ -670,7 +670,31 @@ namespace Framework_Admin.Models
             }
         }
 
-       
+
+        public int UpdateDonHangById(orders kh)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+
+                conn.Open();
+                var str = "UPDATE  orders SET hinhthucthanhtoan=@hinhthucthanhtoan,makm=@makm,matk=@matk,ngaycapnhat=@ngaycapnhat," +
+                    "ngaylap=@ngaylap,phanhoi=@phanhoi,tienship=@tienship,tinhtrangdonhang=@tinhtrangdonhang,tinhtrangthanhtoan=@tinhtrangthanhtoan,tongtien=@tongtien WHERE madh=@madh";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("hinhthucthanhtoan", kh.Hinhthucthanhtoan);
+                cmd.Parameters.AddWithValue("makm", kh.Makm);
+                cmd.Parameters.AddWithValue("matk", kh.Matk);
+                cmd.Parameters.AddWithValue("ngaycapnhat", kh.Ngaycapnhat);
+                cmd.Parameters.AddWithValue("ngaylap", kh.Ngaylap);
+                cmd.Parameters.AddWithValue("phanhoi", kh.Phanhoi);
+                cmd.Parameters.AddWithValue("tienship", kh.Tienship);
+                cmd.Parameters.AddWithValue("tinhtrangdonhang", kh.Tinhtrangdonhang);
+                cmd.Parameters.AddWithValue("tinhtrangthanhtoan", kh.Tinhtrangthanhtoan);
+                cmd.Parameters.AddWithValue("tongtien", kh.Tongtien);
+                cmd.Parameters.AddWithValue("madh", kh.Madh);
+                return (cmd.ExecuteNonQuery());
+            }
+        }
+
 
     }
 }

@@ -60,17 +60,10 @@ namespace Framework_Admin.Controllers
 
         public IActionResult QL_taikhoan()
         {
-           /* var listaccount = _storeContext.GetAccount();
-            if (listaccount != null)
-            {
-                return View(listaccount);
-            }*/
 
            ViewBag.listaccount = _storeContext.GetAccount();
             ViewBag.uservoucher = _storeContext.GetUserVoucher();
             return View();
-
-
         }
 
         public IActionResult KhoaTaiKhoan(client_accounts_framework Id)
@@ -152,7 +145,20 @@ namespace Framework_Admin.Controllers
         public IActionResult CapNhat_VanChuyen()
         {
 
+            ViewBag.listDonHang = _storeContext.GetDonHang();
+            ViewBag.listaccount = _storeContext.GetAccount();
             return View();
+        }
+        public IActionResult ViewDonHang(int km)
+        {
+            ViewBag.listDonHang= _storeContext.ViewDonHang(km);
+            return RedirectToAction("ViewDonHang", "Admin");
+        }
+
+        public IActionResult UpdateDonHangById(orders o)
+        {
+            _storeContext.UpdateDonHangById(o);
+            return RedirectToAction("CapNhat_VanChuyen", "Admin");
         }
 
         public IActionResult ThongKe()
