@@ -440,8 +440,7 @@ namespace Framework_Admin.Models
 
                 conn.Open();
                 var str = "UPDATE  khuyenmais SET daluu=@daluu,dieukien=@dieukien,img=@img,loai=@loai," +
-                    "manhap=@manhap,ngaybd=@ngaybd,ngaykt=@ngaykt,noidung=@noidung,phantram=@phantram,sl=@sl," +
-                    " WHERE makm=@makm";
+                    "manhap=@manhap,ngaybd=@ngaybd,ngaykt=@ngaykt,noidung=@noidung,phantram=@phantram,sl=@sl WHERE makm=@makm";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 cmd.Parameters.AddWithValue("daluu", kh.Daluu);
                 cmd.Parameters.AddWithValue("dieukien", kh.Dieukien);
@@ -453,7 +452,7 @@ namespace Framework_Admin.Models
                 cmd.Parameters.AddWithValue("phantram", kh.Phantram);
                 cmd.Parameters.AddWithValue("sl", kh.Sl);
                 cmd.Parameters.AddWithValue("noidung", kh.Noidung);
-                
+                cmd.Parameters.AddWithValue("makm", kh.Makm);
                 return (cmd.ExecuteNonQuery());
             }
         }

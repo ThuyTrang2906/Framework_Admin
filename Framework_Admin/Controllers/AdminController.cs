@@ -97,9 +97,9 @@ namespace Framework_Admin.Controllers
 
         }
 
-        public IActionResult CapNhat_KM(int Id)
+        public IActionResult CapNhap_KM(int Id)
         {
-            ViewBag.khuyenmai=_storeContext.GetKhuyenMaiById(Id);
+            ViewBag.khuyenmai =_storeContext.GetKhuyenMaiById(Id);
             return View();
 
         }
@@ -146,6 +146,18 @@ namespace Framework_Admin.Controllers
             ViewBag.listbook = _storeContext.GetObject_Book(Madh);
             ViewBag.ThanhTien = _storeContext.TinhThanhTien(Madh);
             ViewBag.TienGiam = _storeContext.GetPhanTramKM(Madh);
+            return View();
+        }
+
+        public IActionResult CapNhat_VanChuyen()
+        {
+
+            return View();
+        }
+
+        public IActionResult ThongKe()
+        {
+            
             return View();
         }
     }

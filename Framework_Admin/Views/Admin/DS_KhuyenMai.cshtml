@@ -160,7 +160,6 @@
                                                     <th>Mã KM</th>
                                                     <th>Nội dung khuyến mãi</th>
                                                     <th>% KM</th>
-                                                    <th>Mức giá áp dụng</th>
                                                     <th>Ngày bắt đầu</th>
                                                     <th>Ngày kết thúc</th>
                                                     <th>Tình trạng</th>
@@ -174,12 +173,11 @@
                                                         <td>@item.Makm</td>
                                                         <td>@item.Noidung</td>
                                                         <td>@item.Phantram</td>
-                                                        <td>chưa nhập</td>
                                                         <td>@item.Ngaybd</td>
                                                         <td>@item.Ngaykt</td>
                                                         <td>CHƯA LÀM</td>
                                                         <td style="display: flex;">
-                                                            <a href="/Admin/CapNhat_KM?Id=@item.Makm" class="btn btn-primary" style=" justify-content: center;">Sửa</a>
+                                                            <a href="/Admin/CapNhap_KM?Id=@item.Makm" class="btn btn-primary" style=" justify-content: center;">Sửa</a>
                                                             <a href="/Admin/Xoa_KM?Id=@item.Makm" class="btn btn-danger" style=" justify-content: center;">Xóa</a>
                                                         </td>
                                                     </tr>
