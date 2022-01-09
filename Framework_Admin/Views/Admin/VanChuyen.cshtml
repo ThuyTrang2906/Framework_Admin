@@ -232,45 +232,55 @@
                                                                                 <td>@item.GetType().GetProperty("Masach").GetValue(item, null)</td>
                                                                                 <td class="text-center">@item.GetType().GetProperty("Giaban").GetValue(item, null) đ</td>
                                                                                 <td class="text-center">@item.GetType().GetProperty("Soluong").GetValue(item, null)</td>
-                                                                                <td class="text-right">@item.GetType().GetProperty("thanhtien").GetValue(item, null)</td>
+                                                                                <td class="text-right">@item.GetType().GetProperty("thanhtien").GetValue(item, null) đ</td>
 
                                                                             </tr>
                                                                         }
 
                                                                     }
 
-                                                                            <tr>
-                                                                                <td class="thick-line"></td>
-                                                                                <td class="thick-line"></td>
-                                                                                <td class="thick-line text-center">
-                                                                                    <strong>Tạm tính</strong>
-                                                                                </td>
+                                                                    <tr>
+                                                                        <td class="thick-line"></td>
+                                                                        <td class="thick-line"></td>
+                                                                        <td class="thick-line text-center">
+                                                                            <strong>Tạm tính</strong>
+                                                                        </td>
 
-                                                                                <td class="thick-line text-right">@ViewBag.listDonHang.Tongtien đ</td>
+                                                                        <td class="thick-line text-right">@ViewBag.ThanhTien đ</td>
 
-                                                                            </tr>
+                                                                    </tr>
 
-                                                                   
-                                                                            <tr>
-                                                                                <td class="no-line"></td>
-                                                                                <td class="no-line"></td>
-                                                                                <td class="no-line text-center">
-                                                                                    <strong>Phí vận chuyển</strong>
-                                                                                </td>
 
-                                                                                <td class="no-line text-right">@ViewBag.listDonHang.Tienship đ</td>
+                                                                    <tr>
+                                                                        <td class="no-line"></td>
+                                                                        <td class="no-line"></td>
+                                                                        <td class="no-line text-center">
+                                                                            <strong>Phí vận chuyển</strong>
+                                                                        </td>
 
-                                                                            </tr>
-                                                                        
+                                                                        <td class="no-line text-right">@ViewBag.listDonHang.Tienship đ</td>
 
-                                                                    
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="no-line"></td>
+                                                                        <td class="no-line"></td>
+                                                                        <td class="no-line text-center">
+                                                                            <strong>Giảm giá</strong>
+                                                                        </td>
+
+                                                                        <td class="no-line text-right">-@ViewBag.TienGiam đ</td>
+
+                                                                    </tr>
+
+
+
                                                                     <tr>
                                                                         <td class="no-line"></td>
                                                                         <td class="no-line"></td>
                                                                         <td class="no-line text-center">
                                                                             <strong>Tổng</strong>
                                                                         </td>
-                                                                        <td class="no-line text-right"><h4 class="m-0">@ViewBag.ThanhTien đ</h4></td>
+                                                                        <td class="no-line text-right"><h4 class="m-0"> @ViewBag.listDonHang.Tongtien đ</h4></td>
                                                                     </tr>
 
                                                                 </tbody>

@@ -585,8 +585,7 @@ namespace Framework_Admin.Models
                 conn.Open();
                 string str = "select o.masach,tongtien, giaban, o.soluong, o.madh, tienship from booklist s, detail_order o, orders where s.masach=o.masach and orders.madh=o.madh and o.madh=@Madh";
                 int thanhtien = 0;
-                int sll = 0;
-                int gb = 0;
+
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 cmd.Parameters.AddWithValue("Madh", Id);
 
@@ -602,8 +601,8 @@ namespace Framework_Admin.Models
                             Tongtien = Convert.ToInt32(reader["tongtien"]),
                             Madh = Convert.ToInt32(reader["madh"]),
                             Tienship = Convert.ToInt32(reader["tienship"]),
-                            thanhtien = Convert.ToInt32(reader["soluong"])* Convert.ToInt32(reader["giaban"]),
-                    };
+                            thanhtien = Convert.ToInt32(reader["soluong"]) * Convert.ToInt32(reader["giaban"]),
+                        };
                         list.Add(ob);
                     }
                     reader.Close();
@@ -615,15 +614,43 @@ namespace Framework_Admin.Models
             return list;
         }
 
-        public int TinhThanhTien(int Madh)
+        public float GetPhanTramKM(int Id)
+        {
+            
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                float tiengiam = 0;
+                conn.Open();
+                string str = "select phantram, tongtien, sum(o.soluong*giaban) as tamtinh from  booklist b, detail_order o, orders, khuyenmais km where b.masach=o.masach and orders.madh=o.madh and orders.makm=km.makm and o.madh=@Madh group by o.madh";
+                
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("Madh", Id);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        reader.Read();
+                        tiengiam = (float)((Convert.ToInt32(reader["phantram"]) * Convert.ToInt32(reader["tamtinh"])) / 100);
+                    }
+                }
+                return tiengiam;
+            }
+            
+        }
+
+        public float TinhThanhTien(int Madh)
         {
             using(MySqlConnection conn = GetConnection())
             {
-                int thanhtien = 0; 
+                /*float thanhtien = 0; 
                 int Tongtien = 0;
                 int Tienship = 0;
+                int phantram = 0;*/
+                int tamtinh = 0 ;
                 conn.Open();
-                string str = "SELECT tongtien, tienship  from booklist b, detail_order o, orders where b.masach=o.masach and o.madh=orders.madh and o.madh=@madh";
+                string str = "SELECT sum(o.soluong*giaban) as tamtinh  from booklist b, detail_order o, orders where b.masach=o.masach and o.madh=orders.madh and o.madh=@madh group by o.madh";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 cmd.Parameters.AddWithValue("madh", Madh);
                 using (var reader = cmd.ExecuteReader())
@@ -631,12 +658,15 @@ namespace Framework_Admin.Models
                     while (reader.Read())
                     {
                         reader.Read();
-                        Tongtien = Convert.ToInt32(reader["tongtien"]);
+                        /*Tongtien = Convert.ToInt32(reader["tongtien"]);
                         Tienship = Convert.ToInt32(reader["tienship"]);
-                        thanhtien = Tongtien - Tienship;
+                        phantram= Convert.ToInt32(reader["phantram"]);
+                        thanhtien = (Convert.ToInt32(reader["tongtien"]) - ((float)((Convert.ToInt32(reader["tongtien"]) * Convert.ToInt32(reader["phantram"]))/100)) + Convert.ToInt32(reader["tienship"]));*/
+                        tamtinh = Convert.ToInt32(reader["tamtinh"]);
                     }
+                    return tamtinh;
+
                 }
-                return thanhtien;
 
             }
         }

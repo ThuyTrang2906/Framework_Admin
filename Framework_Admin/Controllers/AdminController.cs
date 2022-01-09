@@ -145,6 +145,7 @@ namespace Framework_Admin.Controllers
             ViewBag.listaccount = _storeContext.GetAccountById(Matk);
             ViewBag.listbook = _storeContext.GetObject_Book(Madh);
             ViewBag.ThanhTien = _storeContext.TinhThanhTien(Madh);
+            ViewBag.TienGiam = _storeContext.GetPhanTramKM(Madh);
             return View();
         }
     }
