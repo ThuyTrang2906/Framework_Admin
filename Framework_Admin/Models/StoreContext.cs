@@ -725,6 +725,36 @@ namespace Framework_Admin.Models
             return list;
         }
 
+        public List<object> GetThongKeTheLoai()
+        {
+            List<object> list = new List<object>();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = "SELECT theloai, sum(o.soluong) as slban from booklist b, detail_order o where b.masach = o.masach GROUP by theloai";
+
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var ob = new
+                        {
+                            Theloai = reader["theloai"].ToString(),
+                            slban = Convert.ToInt32(reader["slban"]),               
+                        };
+                        list.Add(ob);
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return list;
+        }
 
 
 

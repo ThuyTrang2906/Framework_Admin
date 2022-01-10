@@ -231,12 +231,16 @@
                                                 </thead>
 
                                                 <tbody>
-                                                    <tr>
-                                                        <td>Giả tưởng</td>
-                                                        <td>78</td>
-                                                        
-                                                    </tr>
-                                                   
+                                                    @foreach (var item in ViewBag.ThongKeTheLoai)
+                                                    {
+                                                        <tr>
+                                                            <td>@item.GetType().GetProperty("Theloai").GetValue(item, null)</td>
+                                                            <td>@item.GetType().GetProperty("slban").GetValue(item, null)</td>
+
+                                                        </tr>
+                                                    }
+
+
                                                 </tbody>
                                             </table>
                                         </div>

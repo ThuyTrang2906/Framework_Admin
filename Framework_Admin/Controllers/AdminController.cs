@@ -160,6 +160,7 @@ namespace Framework_Admin.Controllers
         public IActionResult ThongKe()
         {
             ViewBag.ThongKe = _storeContext.ThongKe();
+            ViewBag.ThongKeTheLoai = _storeContext.GetThongKeTheLoai();
             return View();
         }
     }
