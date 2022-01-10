@@ -583,7 +583,6 @@ namespace Framework_Admin.Models
             {
                 conn.Open();
                 string str = "select o.masach,tongtien, giaban, o.soluong, o.madh, tienship from booklist s, detail_order o, orders where s.masach=o.masach and orders.madh=o.madh and o.madh=@Madh";
-                int thanhtien = 0;
 
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 cmd.Parameters.AddWithValue("Madh", Id);
@@ -673,27 +672,61 @@ namespace Framework_Admin.Models
 
         public int UpdateDonHangById(orders kh)
         {
+           
             using (MySqlConnection conn = GetConnection())
             {
 
                 conn.Open();
-                var str = "UPDATE  orders SET hinhthucthanhtoan=@hinhthucthanhtoan,makm=@makm,matk=@matk,ngaycapnhat=@ngaycapnhat," +
-                    "ngaylap=@ngaylap,phanhoi=@phanhoi,tienship=@tienship,tinhtrangdonhang=@tinhtrangdonhang,tinhtrangthanhtoan=@tinhtrangthanhtoan,tongtien=@tongtien WHERE madh=@madh";
+                var str = "UPDATE  orders SET ngaycapnhat=@ngaycapnhat," +
+                    "phanhoi=@phanhoi,tinhtrangdonhang=@tinhtrangdonhang WHERE madh=@madh";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
-                cmd.Parameters.AddWithValue("hinhthucthanhtoan", kh.Hinhthucthanhtoan);
-                cmd.Parameters.AddWithValue("makm", kh.Makm);
-                cmd.Parameters.AddWithValue("matk", kh.Matk);
+                
                 cmd.Parameters.AddWithValue("ngaycapnhat", kh.Ngaycapnhat);
-                cmd.Parameters.AddWithValue("ngaylap", kh.Ngaylap);
                 cmd.Parameters.AddWithValue("phanhoi", kh.Phanhoi);
-                cmd.Parameters.AddWithValue("tienship", kh.Tienship);
-                cmd.Parameters.AddWithValue("tinhtrangdonhang", kh.Tinhtrangdonhang);
-                cmd.Parameters.AddWithValue("tinhtrangthanhtoan", kh.Tinhtrangthanhtoan);
-                cmd.Parameters.AddWithValue("tongtien", kh.Tongtien);
+                cmd.Parameters.AddWithValue("tinhtrangdonhang", kh.Tinhtrangdonhang);                
                 cmd.Parameters.AddWithValue("madh", kh.Madh);
                 return (cmd.ExecuteNonQuery());
             }
         }
+
+
+
+        //Thống kê
+
+        public List<object> ThongKe()
+        {
+            List<object> list = new List<object>();
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = "SELECT DISTINCT count(o.masach) as slSach, count(o.madh) as slDonHang, count(orders.matk) as slTaiKhoan, sum(tongtien) as tongTien  from booklist b, detail_order o, orders where b.masach=o.masach and o.madh=orders.madh";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var ob = new
+                        {
+                            soluongSach = Convert.ToInt32(reader["slSach"]),
+                            soluongDonHang = Convert.ToInt32(reader["slDonHang"]),
+                            soluongTaiKhoan = Convert.ToInt32(reader["slTaiKhoan"]),
+                            tongTien = Convert.ToInt32(reader["tongTien"]),
+
+                            
+                        };
+                        list.Add(ob);
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return list;
+        }
+
+
+
 
 
     }

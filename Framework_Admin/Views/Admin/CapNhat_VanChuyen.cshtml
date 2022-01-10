@@ -67,12 +67,12 @@
 
                     <ul class="nav navbar-right float-right list-inline">
 
-                       @* <li>
-                            <img src="https://sinhnhatchobe.vn/assets/front-site/images/comment.png" alt="..." class="rounded-circle">
-                        </li>*@
-                       @* <li>
-                            <p class="name-icon">admin_account</p>
-                        </li>*@
+                        @* <li>
+                                <img src="https://sinhnhatchobe.vn/assets/front-site/images/comment.png" alt="..." class="rounded-circle">
+                            </li>*@
+                        @* <li>
+                                <p class="name-icon">admin_account</p>
+                            </li>*@
 
                         <li class="d-none d-sm-block">
                             <a href="#" id="btn-fullscreen" class="waves-effect waves-light notification-icon-box"><i class="mdi mdi-fullscreen"></i></a>
@@ -176,30 +176,30 @@
                                         </div>
 
                                         <h4 class="m-b-30 m-t-0">Danh sách đơn hàng</h4>
-                                       @* <form action="/Admin/UpdateDonHangById?Id=" method="POST">*@
-                                            <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                                                <thead>
-                                                    <tr>
+                                        @*<form action="/Admin/UpdateDonHangById?Id=" method="POST">*@
+                                        <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
 
-                                                        <th>Mã ĐH</th>
-                                                        <th>Ngày lập</th>
-                                                        <th>Mã tài khoản</th>
-                                                        <th>Hình thức thanh toán</th>
-                                                        <th>Mã khuyến mãi</th>
-                                                        <th>Tổng tiền</th>
-                                                        <th>Tình trạng thanh toán</th>
-                                                        <th>Tình trạng vận chuyển</th>
-                                                        <th>Xem chi tiết đơn hàng</th>
-                                                        <th>Đơn vị vận chuyển</th>
-                                                        <th>Cập nhật trạng thái giao hàng</th>
-                                                        <th>Phản hồi từ phía giao hàng</th>
-                                                        <th>Hành Động</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach (var item in ViewBag.listDonHang)
-                                                    {
-                                                        <tr class="donhang-tab">
+                                                    <th>Mã ĐH</th>
+                                                    <th>Ngày lập</th>
+                                                    <th>Mã tài khoản</th>
+                                                    <th>Hình thức thanh toán</th>
+                                                    <th>Mã khuyến mãi</th>
+                                                    <th>Tổng tiền</th>
+                                                    <th>Tình trạng thanh toán</th>
+                                                    <th>Tình trạng vận chuyển</th>
+                                                    <th>Xem chi tiết đơn hàng</th>
+                                                    <th>Đơn vị vận chuyển</th>
+                                                    <th>Cập nhật trạng thái giao hàng</th>
+                                                    <th>Phản hồi từ phía giao hàng</th>
+                                                    <th>Hành Động</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in ViewBag.listDonHang)
+                                                {
+                                                    <tr class="donhang-tab">
 
                                                         <td>@item.Madh</td>
                                                         <td>@item.Ngaylap</td>
@@ -217,59 +217,78 @@
                                                             }
 
                                                         }
-                                                                <td>DaBook Ship</td>
-                                                                <td style="display: flex;">
-                                                                    <label class="form-check">
-                                                                        <input name="tinhtrang"
-                                                                               class="form-check-input"
-                                                                               type="radio"
-                                                                               value="đang lấy hàng" />
-                                                                        <span class="form-check-label">
-                                                                            Đang lấy hàng
-                                                                        </span>
-                                                                    </label>
-                                                                    <!-- form-check.// -->
-                                                                    <label class="form-check">
-                                                                        <input name="tinhtrang"
-                                                                               class="form-check-input"
-                                                                               type="radio"
-                                                                               value="đang giao hàng" />
-                                                                        <span class="form-check-label">
-                                                                            Đang giao hàng
-                                                                        </span>
-                                                                    </label>
-                                                                    <!-- form-check.// -->
-                                                                    <label class="form-check">
-                                                                        <input name="tinhtrang"
-                                                                               class="form-check-input"
-                                                                               type="radio"
-                                                                               value="giao hàng thành công" />
-                                                                        <span class="form-check-label">
-                                                                            Giao hàng thành công
-                                                                        </span>
-                                                                    </label>
-                                                                    <!-- form-check.// -->
-                                                                    <label class="form-check">
-                                                                        <input name="tinhtrang"
-                                                                               class="form-check-input"
-                                                                               type="radio"
-                                                                               value="giao hàng thất bại" />
-                                                                        <span class="form-check-label">
-                                                                            Giao hàng thất bại
-                                                                        </span>
-                                                                    </label>
-                                                                    @* <input name="madh" class="form-check-input" type="hidden" value="this.madh" </input>*@
-                                                                </td>
-                                                                <td>
-                                                                    <input class="form-control" name="review" id="review-text" rows="3" type="text" value="@item.Phanhoi"></input>
-                                                                </td>
-                                                                <td>
-                                                                    <a href="/Admin/UpdateDonHangById?Id=@item.Madh" class="btn btn-primary btn-update" style="justify-content: center; ">Cập nhật</a>
-                                                                </td>
-                                                            </tr>
-                                                    }
-                                                    </tbody>
-                                            </table>
+                                                        <td>DaBook Ship</td>
+                                                        <td style="display: flex;">
+                                                            <label class="form-check">
+                                                                <asp:RadioButton ID="choxacnhan" name="tinhtrang"
+                                                                                 class="form-check-input"
+                                                                                 type="radio"
+                                                                                 value="Chờ xác nhận" />
+                                                                <span class="form-check-label">
+                                                                    Chờ xác nhận
+                                                                </span>
+                                                            </label>
+                                                            <label class="form-check">
+                                                                <asp:RadioButton name="tinhtrang"
+                                                                                 ID="danglayhang"
+                                                                                 class="form-check-input"
+                                                                                 type="radio"
+                                                                                 value="đang lấy hàng" />
+                                                                <span class="form-check-label">
+                                                                    Đang lấy hàng
+                                                                </span>
+                                                            </label>
+                                                            <!-- form-check.// -->
+                                                            <label class="form-check">
+                                                                <asp:RadioButton name="tinhtrang"
+                                                                                 class="form-check-input"
+                                                                                 ID="danggiaohang"
+                                                                                 type="radio"
+                                                                                 value="đang giao hàng" />
+                                                                <span class="form-check-label">
+                                                                    Đang giao hàng
+                                                                </span>
+                                                            </label>
+                                                            <!-- form-check.// -->
+                                                            <label class="form-check">
+                                                                <asp:RadioButton name="tinhtrang"
+                                                                                 class="form-check-input"
+                                                                                 ID="giaohangthanhcong"
+                                                                                 type="radio"
+                                                                                 value="giao hàng thành công" />
+                                                                <span class="form-check-label">
+                                                                    Giao hàng thành công
+                                                                </span>
+                                                            </label>
+                                                            <!-- form-check.// -->
+                                                            <label class="form-check">
+                                                                <asp:RadioButton name="tinhtrang"
+                                                                                 class="form-check-input"
+                                                                                 ID="giaohangthatbai"
+                                                                                 type="radio"
+                                                                                 value="giao hàng thất bại" />
+                                                                <span class="form-check-label">
+                                                                    Giao hàng thất bại
+                                                                </span>
+                                                            </label>
+
+
+                                                            @* <input name="madh" class="form-check-input" type="hidden" value="this.madh" </input>*@
+                                                        </td>
+                                                        <td>
+                                                            <input class="form-control" name="review" id="review-text" rows="3" type="text" value="@item.Phanhoi"></input>
+                                                        </td>
+                                                        <td>
+                                                            <a href="/Admin/UpdateDonHangById?Id=@item.Madh" class="btn btn-primary btn-update" style="justify-content: center; ">Cập nhật</a>
+                                                        </td>
+                                                        @{
+
+                                                        }
+                                                        }
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
                                         @*</form>*@
                                     </div>
                                 </div>
@@ -309,43 +328,43 @@
     </div>
     <!-- END wrapper -->
     @*   <script>
-         $('.btn-update').on('click', function(e) {
+             $('.btn-update').on('click', function(e) {
 
-         alert('Được rồi đấy')
-         var tinhtrang, madh, review
-         var list = document.querySelectorAll('.form-check-input');
-         Array.prototype.forEach.call(list, function (element,index) {
-           tinhtrang = element.value;
-           madh = element.attr('name')
-         });
+             alert('Được rồi đấy')
+             var tinhtrang, madh, review
+             var list = document.querySelectorAll('.form-check-input');
+             Array.prototype.forEach.call(list, function (element,index) {
+               tinhtrang = element.value;
+               madh = element.attr('name')
+             });
 
-          !-- var sanpham=$('.donhang-tab')
-             sanpham.each(function(e)
-             {
-                 if($(this).find('.form-check-input').prop('checked')===true)
+              !-- var sanpham=$('.donhang-tab')
+                 sanpham.each(function(e)
                  {
-                         madh = $(this).find('.form-check-input').text(),
-                         tensach = $(this).find('.form-check-input').value(),
-                         review = $(this).find('#review-text').text(),
-                 }
-             }) --
+                     if($(this).find('.form-check-input').prop('checked')===true)
+                     {
+                             madh = $(this).find('.form-check-input').text(),
+                             tensach = $(this).find('.form-check-input').value(),
+                             review = $(this).find('#review-text').text(),
+                     }
+                 }) --
 
-             !-- var review =$('#review-text').text() --
+                 !-- var review =$('#review-text').text() --
 
-          alert(madh, tinhtrang, review)
+              alert(madh, tinhtrang, review)
 
-            $.ajax({
-                 url: '/admin/cap-nhat-van-chuyen',
-                 method: 'POST',
-                 data: JSON.stringify({
-                     madh: madh
-                     tinhtrang: tinhtrang,
-                     review: review,
-                 }),
-                 contentType: 'application/json',
-             })
-        });*@
-    </script>
+                $.ajax({
+                     url: '/admin/cap-nhat-van-chuyen',
+                     method: 'POST',
+                     data: JSON.stringify({
+                         madh: madh
+                         tinhtrang: tinhtrang,
+                         review: review,
+                     }),
+                     contentType: 'application/json',
+                 })
+            });
+        </script>*@
 
     <!-- jQuery  -->
     <script src=".\js\jquery.min.js"></script>

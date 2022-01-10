@@ -41,5 +41,7 @@ namespace Framework_Admin.Models
             this.tinhtrangthanhtoan = tinhtrangthanhtoan;
             this.tongtien = tongtien;
         }
+
+       
     }
 }

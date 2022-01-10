@@ -149,11 +149,7 @@ namespace Framework_Admin.Controllers
             ViewBag.listaccount = _storeContext.GetAccount();
             return View();
         }
-        public IActionResult ViewDonHang(int km)
-        {
-            ViewBag.listDonHang= _storeContext.ViewDonHang(km);
-            return RedirectToAction("ViewDonHang", "Admin");
-        }
+       
 
         public IActionResult UpdateDonHangById(orders o)
         {
@@ -163,7 +159,7 @@ namespace Framework_Admin.Controllers
 
         public IActionResult ThongKe()
         {
-            
+            ViewBag.ThongKe = _storeContext.ThongKe();
             return View();
         }
     }
