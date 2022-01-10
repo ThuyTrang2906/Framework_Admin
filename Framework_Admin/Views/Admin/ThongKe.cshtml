@@ -146,12 +146,14 @@
                             <form action="#">
                                 <div class="form-group">
                                     <label>Khoảng thời gian muốn thống kê</label>
-                                    <div>
+                                    <div style="display:flex">
                                         <div class="input-daterange input-group" id="date-range">
-                                            <input type="text" class="form-control" name="start">
+                                            <input type="date" class="form-control" name="start">
                                             <span class="input-group-addon bg-primary text-white b-0">to</span>
-                                            <input type="text" class="form-control" name="end">
+                                            <input type="date" class="form-control" name="end">
+                                            <input class="input-group-addon bg-primary text-white b-0" type="submit" value="Thống kê" name="end">
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </form>

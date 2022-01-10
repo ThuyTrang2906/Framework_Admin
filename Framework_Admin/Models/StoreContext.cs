@@ -699,7 +699,7 @@ namespace Framework_Admin.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                string str = "SELECT DISTINCT count(o.masach) as slSach, count(o.madh) as slDonHang, count(orders.matk) as slTaiKhoan, sum(tongtien) as tongTien  from booklist b, detail_order o, orders where b.masach=o.masach and o.madh=orders.madh";
+                string str = "SELECT DISTINCT sum(o.soluong) as slSach, count(o.madh) as slDonHang, count(orders.matk) as slTaiKhoan, sum(tongtien) as tongTien  from booklist b, detail_order o, orders where b.masach=o.masach and o.madh=orders.madh";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 using (var reader = cmd.ExecuteReader())
                 {
