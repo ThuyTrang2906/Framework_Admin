@@ -80,12 +80,9 @@ namespace Framework_Admin.Controllers
 
         public IActionResult DS_KhuyenMai()
         {
-            var listKhuyenMai = _storeContext.GetKhuyenMai();
-            if (listKhuyenMai != null)
-            {
-                return View(listKhuyenMai);
-            }
+            ViewBag.khuyenmai = _storeContext.GetKhuyenMai();
             return View();
+
 
 
         }
