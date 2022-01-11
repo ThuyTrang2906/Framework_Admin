@@ -720,21 +720,24 @@ namespace Framework_Admin.Models
         }
 
 
-        public int UpdateDonHangById(orders kh)
+        public int UpdateDonHangById(int Id, string Tinhtrangdonhang, string Phanhoi)
         {
+
+
            
             using (MySqlConnection conn = GetConnection())
             {
 
                 conn.Open();
-                var str = "UPDATE  orders SET ngaycapnhat=@ngaycapnhat," +
-                    "phanhoi=@phanhoi,tinhtrangdonhang=@tinhtrangdonhang WHERE madh=@madh";
+                var str = @"UPDATE  orders 
+                            SET phanhoi=@phanhoi,tinhtrangdonhang=@tinhtrangdonhang 
+                            WHERE madh=@madh";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 
-                cmd.Parameters.AddWithValue("ngaycapnhat", kh.Ngaycapnhat);
-                cmd.Parameters.AddWithValue("phanhoi", kh.Phanhoi);
-                cmd.Parameters.AddWithValue("tinhtrangdonhang", kh.Tinhtrangdonhang);                
-                cmd.Parameters.AddWithValue("madh", kh.Madh);
+            
+                cmd.Parameters.AddWithValue("phanhoi", Phanhoi);
+                cmd.Parameters.AddWithValue("tinhtrangdonhang", Tinhtrangdonhang);                
+                cmd.Parameters.AddWithValue("madh", Id);
                 return (cmd.ExecuteNonQuery());
             }
         }
@@ -878,6 +881,40 @@ namespace Framework_Admin.Models
             }
             return list;
         }
+
+        public List<object> DataDoanhThu()
+        {
+            List<object> list = new List<object>();
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = @"SELECT DISTINCT sum(tongtien) as doanhthu, Month(orders.ngaylap) as month
+                            from booklist b, detail_order o, orders
+                                where b.masach = o.masach and o.madh = orders.madh and tinhtrangthanhtoan = 'Đã thanh toán'
+                                GROUP by Month(orders.ngaylap)
+                            ORDER BY Month(orders.ngaylap) ASC";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var ob = new
+                        {
+                            doanhthu = Convert.ToInt32(reader["doanhthu"]),
+                            month = Convert.ToInt32(reader["month"]),
+                        };
+                        list.Add(ob);
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return list;
+        }
+
+
 
     }
 }

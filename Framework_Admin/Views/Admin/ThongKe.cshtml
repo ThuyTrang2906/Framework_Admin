@@ -1,4 +1,4 @@
-﻿
+﻿@using System.Web;
 <div class="content">
 
     <div class="">
@@ -122,28 +122,56 @@
     </div> <!-- Page content Wrapper -->
 
 </div> <!-- content -->
-<div>
+<div style="margin-bottom:50px;">
     <canvas id="myChart"></canvas>
 </div>
 @section chart {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const labels = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-        ];
+    <script type="text/javascript">
 
+        const month = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        var datas = [];
+       var items = @Html.Raw(Json.Serialize(ViewBag.DataDoanhThu));
+        var k = 0;
+
+        for (let i = 1; i <=12; i++)
+        {
+            console.log(items[k].month);
+            if (items[k].month == i) {
+                datas.push(items[k].doanhthu);
+                k++;
+            }
+            else {
+                datas.push(0);
+            }
+
+        }
+        console.log(datas)
         const data = {
-            labels: labels,
+            labels: month,
             datasets: [{
-                label: 'My First dataset',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: [0, 10, 5, 2, 20, 30, 45],
+                label: 'Doanh thu ',
+                data: datas,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(255, 159, 64, 0.8)',
+                    'rgba(255, 205, 86, 0.8)',
+                    'rgba(75, 192, 192, 0.8)',
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(153, 102, 255, 0.8)',
+                    'rgba(201, 203, 207, 0.8)'
+                ],
+                borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)'
+                ],
+                borderWidth: 1,
+                color: 'white'
             }]
         };
 
@@ -155,7 +183,8 @@
                     y: {
                         beginAtZero: true
                     }
-                }
+                },
+                
             },
         };
     </script>

@@ -18,14 +18,15 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="col-lg-6" style="margin-left: -10px;">
-                                            <form action="#">
+                                            <form action="/Admin/FilterCNDonHang" method="post">
                                                 <div class="form-group">
                                                     <label>Đơn hàng trong khoảng thời gian</label>
                                                     <div>
                                                         <div class="input-daterange input-group" id="date-range">
-                                                            <input type="text" class="form-control" name="start">
+                                                            <input type="date" class="form-control" name="start" required />
                                                             <span class="input-group-addon bg-primary text-white b-0">to</span>
-                                                            <input type="text" class="form-control" name="end">
+                                                            <input type="date" class="form-control" name="end" required /> &emsp;
+                                                            <button id="buttonTimKiem" type="submit" class="input-group-addon bg-primary text-white b-0">Tìm kiếm</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -48,15 +49,16 @@
                                                     <th>Xem chi tiết đơn hàng</th>
                                                     <th>Đơn vị vận chuyển</th>
                                                     <th>Cập nhật trạng thái giao hàng</th>
-                                                    <th>Phản hồi từ phía giao hàng</th>
+                                                    <th class="textOver">Phản hồi từ phía giao hàng</th>
                                                     <th>Hành Động</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach (var item in ViewBag.listDonHang)
                                                 {
+                                                    
                                                     <tr class="donhang-tab">
-
+                                                        <form action="/Admin/UpdateDonHangById?Id=@item.Madh" method="post">
                                                         <td>@item.Madh</td>
                                                         <td>@item.Ngaylap</td>
                                                         <td>@item.Matk</td>
@@ -74,56 +76,56 @@
 
                                                         }
                                                         <td>DaBook Ship</td>
-                                                        <td style="display: flex;">
+                                                        <td style="display: flex; flex-wrap:wrap; width:200px">
                                                             <label class="form-check">
-                                                                <input ID="choxacnhan" name="tinhtrang"
+                                                                <input id="choxacnhan" name="Tinhtrangdonhang"
                                                                        class="form-check-input"
                                                                        type="radio"
-                                                                       value="Chờ xác nhận" />
-                                                                <span class="form-check-label">
+                                                                       value="Chờ xác nhận" checked="checked" />
+                                                                <span class="form-check-label textOver">
                                                                     Chờ xác nhận
-                                                                </span>
+                                                                </span><br />
                                                             </label>
                                                             <label class="form-check">
-                                                                <input name="tinhtrang"
-                                                                       ID="danglayhang"
+                                                                <input name="Tinhtrangdonhang"
+                                                                       id="danglayhang"
                                                                        class="form-check-input"
                                                                        type="radio"
                                                                        value="đang lấy hàng" />
-                                                                <span class="form-check-label">
+                                                                <span class="form-check-label textOver">
                                                                     Đang lấy hàng
                                                                 </span>
-                                                            </label>
+                                                            </label><br />
                                                             <!-- form-check.// -->
                                                             <label class="form-check">
-                                                                <input name="tinhtrang"
+                                                                <input name="Tinhtrangdonhang"
                                                                        class="form-check-input"
                                                                        ID="danggiaohang"
                                                                        type="radio"
                                                                        value="đang giao hàng" />
-                                                                <span class="form-check-label">
+                                                                <span class="form-check-label textOver">
                                                                     Đang giao hàng
                                                                 </span>
-                                                            </label>
+                                                            </label><br />
                                                             <!-- form-check.// -->
                                                             <label class="form-check">
-                                                                <input name="tinhtrang"
+                                                                <input name="Tinhtrangdonhang"
                                                                        class="form-check-input"
                                                                        ID="giaohangthanhcong"
                                                                        type="radio"
                                                                        value="giao hàng thành công" />
-                                                                <span class="form-check-label">
+                                                                <span class="form-check-label textOver">
                                                                     Giao hàng thành công
                                                                 </span>
-                                                            </label>
+                                                            </label><br />
                                                             <!-- form-check.// -->
                                                             <label class="form-check">
-                                                                <input name="tinhtrang"
+                                                                <input name="Tinhtrangdonhang"
                                                                        class="form-check-input"
                                                                        ID="giaohangthatbai"
                                                                        type="radio"
                                                                        value="giao hàng thất bại" />
-                                                                <span class="form-check-label">
+                                                                <span class="form-check-label textOver">
                                                                     Giao hàng thất bại
                                                                 </span>
                                                             </label>
@@ -132,14 +134,16 @@
                                                             @* <input name="madh" class="form-check-input" type="hidden" value="this.madh" </input>*@
                                                         </td>
                                                         <td>
-                                                            <input class="form-control" name="review" id="review-text" rows="3" type="text" value="@item.Phanhoi"/>
+                                                            <input class="form-control" name="Phanhoi" id="review-text" rows="3" type="text" value="@item.Phanhoi" />
                                                         </td>
                                                         <td>
-                                                            <a href="/Admin/UpdateDonHangById?Id=@item.Madh" class="btn btn-primary btn-update" style="justify-content: center; ">Cập nhật</a>
+                                                            <input type="submit" class="btn btn-primary btn-update" style="justify-content: center; " value="Cập nhật" />
                                                         </td>
 
-
+                                                        </form>
                                                     </tr>
+                                                    
+
                                                 }
                                             </tbody>
                                         </table>

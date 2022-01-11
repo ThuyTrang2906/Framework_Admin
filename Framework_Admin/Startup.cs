@@ -27,7 +27,7 @@ namespace Framework_Admin
             services.AddControllersWithViews();
             services.AddMvc();
             services.Add(new ServiceDescriptor(typeof(StoreContext), new StoreContext(Configuration.GetConnectionString("DefaultConnection"))));
-            
+     
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

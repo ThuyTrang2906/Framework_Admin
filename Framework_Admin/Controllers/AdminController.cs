@@ -135,8 +135,14 @@ namespace Framework_Admin.Controllers
             return View("DS_DonHang");
                 
         }
+        public IActionResult FilterCNDonHang(DateTime start, DateTime end)
+        {
+            ViewBag.listDonHang = _storeContext.FilterDonHang(start, end);
+            ViewBag.listaccount = _storeContext.GetAccount();
+            return View("CapNhat_VanChuyen");
 
-            public IActionResult VanChuyen(int Madh, int Matk)
+        }
+        public IActionResult VanChuyen(int Madh, int Matk)
         {
             ViewBag.listDonHang = _storeContext.ViewDonHang(Madh);          
             ViewBag.listaccount = _storeContext.GetAccountById(Matk);
@@ -155,9 +161,9 @@ namespace Framework_Admin.Controllers
         }
        
 
-        public IActionResult UpdateDonHangById(orders o)
+        public IActionResult UpdateDonHangById(int Id,string Tinhtrangdonhang,string Phanhoi)
         {
-            _storeContext.UpdateDonHangById(o);
+            _storeContext.UpdateDonHangById(Id,Tinhtrangdonhang,Phanhoi);
             return RedirectToAction("CapNhat_VanChuyen", "Admin");
         }
 
@@ -165,6 +171,8 @@ namespace Framework_Admin.Controllers
         {
             ViewBag.ThongKe = _storeContext.ThongKe();
             ViewBag.ThongKeTheLoai = _storeContext.GetThongKeTheLoai();
+            ViewBag.DataDoanhThu = _storeContext.DataDoanhThu();
+            
             return View();
         }
 
