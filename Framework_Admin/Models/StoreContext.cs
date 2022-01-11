@@ -537,6 +537,56 @@ namespace Framework_Admin.Models
             return list;
         }
 
+         public List<orders> FilterDonHang(DateTime Start, DateTime End)
+        {
+            List<orders> list = new List<orders>();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+
+                
+
+                string start = string.Format("{0:yyyy/MM/dd}", Convert.ToDateTime(Start));
+                string end = string.Format("{0:yyyy/MM/dd}", Convert.ToDateTime(End));
+
+                conn.Open();
+                string str = "select * from orders where (ngaylap BETWEEN @start AND @end)";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("start", start);
+                cmd.Parameters.AddWithValue("end", end);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new orders()
+                        {
+
+                            Madh = Convert.ToInt32(reader["madh"]),
+                            Matk = Convert.ToInt32(reader["matk"]),
+                            Makm = Convert.ToInt32(reader["makm"]),
+
+                            Tienship = Convert.ToInt32(reader["tienship"]),
+                            Phanhoi = reader["phanhoi"].ToString(),
+                            Tinhtrangdonhang = reader["tinhtrangdonhang"].ToString(),
+                            Tinhtrangthanhtoan = reader["tinhtrangthanhtoan"].ToString(),
+                            Tongtien = Convert.ToInt32(reader["tongtien"]),
+                            Hinhthucthanhtoan = reader["hinhthucthanhtoan"].ToString(),
+
+                            Ngaycapnhat = Convert.ToDateTime(reader["ngaycapnhat"]),
+                            Ngaylap = Convert.ToDateTime(reader["ngaylap"]),
+
+
+                        });
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return list;
+        }
+
         public orders ViewDonHang(int Id)
         {
             orders kh = new orders();
@@ -699,7 +749,7 @@ namespace Framework_Admin.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                string str = "SELECT DISTINCT sum(o.soluong) as slSach, count(o.madh) as slDonHang, count(orders.matk) as slTaiKhoan, sum(tongtien) as tongTien  from booklist b, detail_order o, orders where b.masach=o.masach and o.madh=orders.madh";
+                string str = "SELECT DISTINCT sum(o.soluong) as slSach, count(o.madh) as slDonHang, count(orders.matk) as slTaiKhoan, sum(tongtien) as tongTien  from booklist b, detail_order o, orders where b.masach=o.masach and o.madh=orders.madh and tinhtrangthanhtoan = 'Đã thanh toán'";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -756,8 +806,78 @@ namespace Framework_Admin.Models
             return list;
         }
 
+        public List<object> FilterThongKe(DateTime Start, DateTime End)
+        {
+            List<object> list = new List<object>();
+            using (MySqlConnection conn = GetConnection())
+            {
+                string start = string.Format("{0:yyyy/MM/dd}", Convert.ToDateTime(Start));
+                string end = string.Format("{0:yyyy/MM/dd}", Convert.ToDateTime(End));
+                conn.Open();
+                string str = "SELECT DISTINCT sum(o.soluong) as slSach, count(o.madh) as slDonHang, count(orders.matk) as slTaiKhoan, sum(tongtien) as tongTien  from booklist b, detail_order o, orders where b.masach=o.masach and o.madh=orders.madh and (ngaylap BETWEEN @start AND @end) and tinhtrangthanhtoan = 'Đã thanh toán'";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("start", start);
+                cmd.Parameters.AddWithValue("end", end);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var ob = new
+                        {
+                            soluongSach = Convert.ToInt32(reader["slSach"]),
+                            soluongDonHang = Convert.ToInt32(reader["slDonHang"]),
+                            soluongTaiKhoan = Convert.ToInt32(reader["slTaiKhoan"]),
+                            tongTien = Convert.ToInt32(reader["tongTien"]),
 
 
+                        };
+                        list.Add(ob);
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return list;
+        }
+
+        public List<object> FilterThongKeTheLoai(DateTime Start, DateTime End)
+        {
+            List<object> list = new List<object>();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string start = string.Format("{0:yyyy/MM/dd}", Convert.ToDateTime(Start));
+                string end = string.Format("{0:yyyy/MM/dd}", Convert.ToDateTime(End));
+                string str = @"SELECT theloai, sum(o.soluong) as slban from booklist b, detail_order o where b.masach = o.masach 
+                            and o.masach in (SELECT DISTINCT o.masach
+                            from booklist b, detail_order o, orders
+                            where b.masach = o.masach and o.madh = orders.madh and (ngaylap BETWEEN @start AND @end) and tinhtrangthanhtoan = 'Đã thanh toán') GROUP by theloai";
+
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("start", start);
+                cmd.Parameters.AddWithValue("end", end);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var ob = new
+                        {
+                            Theloai = reader["theloai"].ToString(),
+                            slban = Convert.ToInt32(reader["slban"]),
+                        };
+                        list.Add(ob);
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return list;
+        }
 
     }
 }

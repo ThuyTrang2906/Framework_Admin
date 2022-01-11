@@ -143,15 +143,15 @@
                     <div class="page-header-title">
                         <h4 class="page-title">Thống kê doanh thu</h4>
                         <div class="col-lg-6" style="margin-left: -10px;">
-                            <form action="#">
+                            <form action="/Admin/FilterThongKe" method="post">
                                 <div class="form-group">
                                     <label>Khoảng thời gian muốn thống kê</label>
                                     <div style="display:flex">
                                         <div class="input-daterange input-group" id="date-range">
-                                            <input type="date" class="form-control" name="start">
+                                            <input type="date" class="form-control" name="start" required />
                                             <span class="input-group-addon bg-primary text-white b-0">to</span>
-                                            <input type="date" class="form-control" name="end">
-                                            <input class="input-group-addon bg-primary text-white b-0" type="submit" value="Thống kê" name="end">
+                                            <input type="date" class="form-control" name="end" required /> &emsp;
+                                            <button id="buttonTimKiem" type="submit" class="input-group-addon bg-primary text-white b-0">Tìm kiếm</button>
                                         </div>
                                         
                                     </div>
@@ -235,6 +235,7 @@
                                                 <tbody>
                                                     @foreach (var item in ViewBag.ThongKeTheLoai)
                                                     {
+
                                                         <tr>
                                                             <td>@item.GetType().GetProperty("Theloai").GetValue(item, null)</td>
                                                             <td>@item.GetType().GetProperty("slban").GetValue(item, null)</td>
