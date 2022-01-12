@@ -39,15 +39,15 @@
                                                 <tr>
 
                                                     <th>Mã ĐH</th>
-                                                    <th>Ngày lập</th>
-                                                    <th>Mã tài khoản</th>
+                                                    @*<th>Ngày lập</th>*@
+                                                    @*<th>Mã tài khoản</th>*@
                                                     <th>Hình thức thanh toán</th>
-                                                    <th>Mã khuyến mãi</th>
-                                                    <th>Tổng tiền</th>
-                                                    <th>Tình trạng thanh toán</th>
+                                                    @*<th>Mã khuyến mãi</th>*@
+                                                    @*<th>Tổng tiền</th>*@
+                                                    @*<th>Tình trạng thanh toán</th>*@
                                                     <th>Tình trạng vận chuyển</th>
-                                                    <th>Xem chi tiết đơn hàng</th>
-                                                    <th>Đơn vị vận chuyển</th>
+                                                   @* <th>Xem chi tiết đơn hàng</th>*@
+                                                   @* <th>Đơn vị vận chuyển</th>*@
                                                     <th>Cập nhật trạng thái giao hàng</th>
                                                     <th class="textOver">Phản hồi từ phía giao hàng</th>
                                                     <th>Hành Động</th>
@@ -60,28 +60,28 @@
                                                     <tr class="donhang-tab">
                                                         <form action="/Admin/UpdateDonHangById?Id=@item.Madh" method="post">
                                                         <td>@item.Madh</td>
-                                                        <td>@item.Ngaylap</td>
-                                                        <td>@item.Matk</td>
+                                                       @* <td>@item.Ngaylap</td>*@
+                                                        @*<td>@item.Matk</td>*@
                                                         <td>@item.Hinhthucthanhtoan</td>
-                                                        <td>@item.Makm</td>
-                                                        <td>@item.Tongtien</td>
-                                                        <td>@item.Tinhtrangthanhtoan</td>
+                                                       @* <td>@item.Makm</td>*@
+                                                       @* <td>@item.Tongtien</td>*@
+                                                       @* <td>@item.Tinhtrangthanhtoan</td>*@
                                                         <td>@item.Tinhtrangdonhang</td>
-                                                        @foreach (var item1 in ViewBag.listaccount)
+                                                      @*  @foreach (var item1 in ViewBag.listaccount)
                                                         {
                                                             if (@item.Matk == @item1.Matk)
                                                             {
                                                                 <td>@item1.Hoten,@item1.Sodt,@item1.Diachi </td>
                                                             }
 
-                                                        }
-                                                        <td>DaBook Ship</td>
+                                                        }*@
+                                                       @* <td>DaBook Ship</td>*@
                                                         <td style="display: flex; flex-wrap:wrap; width:200px">
                                                             <label class="form-check">
                                                                 <input id="choxacnhan" name="Tinhtrangdonhang"
                                                                        class="form-check-input"
                                                                        type="radio"
-                                                                       value="Chờ xác nhận" checked="checked" />
+                                                                       value="Chờ xác nhận" />
                                                                 <span class="form-check-label textOver">
                                                                     Chờ xác nhận
                                                                 </span><br />
