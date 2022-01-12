@@ -20,28 +20,29 @@ namespace Framework_Admin.Models
 
         // Quản lý sách
 
-        public List<object> GetBook( int soLS)
+      
+
+        public List<object> GetBook()
         {
             List<object> list = new List<object>();
 
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                string str = "select s.masach,danhgia,giaban,giagoc,giamgia,hinhanh,hinhthuc,mota,ngonngu,nxb,sobinhchon,tacgia,namxb,tensach, theloai, s.soluong, sum(o.soluong) as soluongban  from booklist s, detail_order o where s.masach=o.masach group by s.masach,danhgia,giaban,giagoc,giamgia,hinhanh,hinhthuc,mota,ngonngu,nxb,sobinhchon,tacgia,namxb,tensach, theloai, s.soluong";
+                string str = "select s.masach,soluongban,danhgia,giaban,giagoc,giamgia,hinhanh,hinhthuc,mota,ngonngu,nxb,sobinhchon,tacgia,namxb,tensach, theloai, s.soluong from booklist s";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
-                cmd.Parameters.AddWithValue("soluongban", soLS);
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        var ob = new 
+                        var ob = new
                         {
                             Masach = Convert.ToInt32(reader["masach"]),
                             Danhgia = Convert.ToInt32(reader["danhgia"]),
                             Giaban = Convert.ToInt32(reader["giaban"]),
                             Giagoc = Convert.ToInt32(reader["giagoc"]),
                             Giamgia = Convert.ToInt32(reader["giamgia"]),
-                          
+
                             Hinhanh = reader["hinhanh"].ToString(),
                             Hinhthuc = reader["hinhthuc"].ToString(),
                             Mota = reader["mota"].ToString(),
@@ -49,12 +50,13 @@ namespace Framework_Admin.Models
                             Nxb = reader["nxb"].ToString(),
                             Sobinhchon = reader["sobinhchon"].ToString(),
                             Tacgia = reader["tacgia"].ToString(),
-                            Namxb = Convert.ToDateTime(reader["namxb"]),    
+                            Namxb = Convert.ToDateTime(reader["namxb"]),
 
                             Tensach = reader["tensach"].ToString(),
                             Theloai = reader["theloai"].ToString(),
                             Soluong = Convert.ToInt32(reader["soluong"]),
-                            Soluongban= Convert.ToInt32(reader["soluongban"]),
+                            Soluongban = Convert.ToInt32(reader["soluongban"]),
+
                         };
                         list.Add(ob);
                     }
@@ -68,7 +70,6 @@ namespace Framework_Admin.Models
         }
 
 
-       
 
 
 
@@ -356,20 +357,94 @@ namespace Framework_Admin.Models
 
 
         //Quản lý khuyến mãi
-        public List<khuyenmais> GetKhuyenMai()
+        public List<object> GetKhuyenMai()
         {
-            List<khuyenmais> list = new List<khuyenmais>();
-
+            List<object> list = new List<object>();
+            
             using (MySqlConnection conn = GetConnection())
             {
+                DateTime now = DateTime.Now;
+
                 conn.Open();
-                string str = "select * from khuyenmais";
+                string str = @"select img, daluu, dieukien, makm, phantram, sl, loai, manhap, noidung, ngaybd, 
+                    ngaykt,day(ngaybd) as ngaybatdau, month(ngaybd) as thangbatdau, year(ngaybd) as nambatdau,
+                    day(ngaykt) as ngayketthuc, month(ngaykt) as thangketthuc, year(ngaykt) as namketthuc 
+                    from khuyenmais";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        list.Add(new khuyenmais()
+
+                        var ngaybatdau = Convert.ToInt32(reader["ngaybatdau"]);
+                        var thangbatdau = Convert.ToInt32(reader["thangbatdau"]);
+                        var nambatdau = Convert.ToInt32(reader["nambatdau"]);
+                        var ngayketthuc = Convert.ToInt32(reader["ngayketthuc"]);
+                        var thangketthuc = Convert.ToInt32(reader["thangketthuc"]);
+                           var namketthuc = Convert.ToInt32(reader["namketthuc"]);
+                        var tinhTrang = "";
+                        if (nambatdau <= now.Year)
+                        {
+                            if (ngaybatdau > now.Day && thangbatdau > now.Month)
+                                tinhTrang = "Chưa bắt đầu";
+                            else
+                            {
+                                if (thangbatdau == now.Month)
+                                {
+                                    if (ngaybatdau > now.Day)
+                                    {
+                                        tinhTrang = "Chưa bắt đầu";
+                                    }
+                                    else
+                                    {
+                                        if (namketthuc == now.Year)
+                                        {
+                                            if (ngayketthuc >= now.Day && thangketthuc >= now.Month)
+                                                tinhTrang = "Đang diễn ra";
+                                            else
+                                                tinhTrang = "Đã kết thúc";
+                                        }
+                                        else
+                                        {
+                                            if (namketthuc > now.Year)
+                                                tinhTrang = "Đang diễn ra";
+                                            else
+                                                tinhTrang = "Đã kết thúc";
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (namketthuc == now.Year)
+                                    {
+                                        if (thangketthuc > now.Month)
+                                            tinhTrang = "Đang diễn ra";
+                                        else
+                                            if(thangketthuc == now.Month)
+                                            {
+                                                if(ngayketthuc<now.Day)
+                                                    tinhTrang = "Đã kết thúc";
+                                                else
+                                                tinhTrang = "Đang diễn ra";
+                                        }
+                                            else
+                                                tinhTrang = "Đã kết thúc";
+                                    }
+                                    else
+                                    {
+                                        if (namketthuc > now.Year)
+                                            tinhTrang = "Đang diễn ra";
+                                        else
+                                            tinhTrang = "Đã kết thúc";
+                                    }
+                                }
+                            }   
+                        }
+                        else
+                        {
+                            tinhTrang = "Chưa bắt đầu";
+                        }
+                        var ob = new
                         {
                             Img = reader["img"].ToString(),
                             Daluu = Convert.ToInt32(reader["daluu"]),
@@ -381,12 +456,13 @@ namespace Framework_Admin.Models
                             Loai = reader["loai"].ToString(),
                             Manhap = reader["manhap"].ToString(),
                             Noidung = reader["noidung"].ToString(),
-                            
-                             Ngaybd = Convert.ToDateTime(reader["ngaybd"]),
-                             Ngaykt = Convert.ToDateTime(reader["ngaykt"]),
+                            Ngaybd=Convert.ToDateTime(reader["ngaybd"]),
+                            Ngaykt = Convert.ToDateTime(reader["ngaykt"]),
+                            TinhTrang = tinhTrang,
+                             
 
+                    }; list.Add(ob);
 
-                        });
                     }
                     reader.Close();
                 }
@@ -396,6 +472,103 @@ namespace Framework_Admin.Models
             }
             return list;
         }
+
+ /*       public string TinhTrangKhuyenMai()
+        {
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                string tinhTrang = "";
+                
+                int ngaybatdau, ngayketthuc, thangketthuc, namketthuc, nambatdau, thangbatdau  = 0 ;
+                string str = @"select day(ngaybd) as ngaybatdau, month(ngaybd) as thangbatdau, year(ngaybd) as nambatdau,
+                    day(ngaykt) as ngayketthuc, month(ngaykt) as thangketthuc, year(ngaykt) as namketthuc from khuyenmais";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                DateTime now = DateTime.Now;
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        reader.Read();
+
+                        ngaybatdau = Convert.ToInt32(reader["ngaybatdau"]);
+                        thangbatdau = Convert.ToInt32(reader["thangbatdau"]);
+                        nambatdau = Convert.ToInt32(reader["nambatdau"]);
+                        ngayketthuc = Convert.ToInt32(reader["ngayketthuc"]);
+                        thangketthuc = Convert.ToInt32(reader["thangketthuc"]);
+                        namketthuc = Convert.ToInt32(reader["namketthuc"]);
+                        if (nambatdau < now.Year)
+                        {
+                            if (namketthuc >= now.Year)
+                            {
+                                if (thangketthuc >= now.Month)
+                                {
+                                    if (ngayketthuc >= now.Day)
+                                    {
+                                        tinhTrang = "Đang diễn ra";
+                                    }
+                                    if (ngayketthuc < now.Day)
+                                    {
+                                        tinhTrang = "Đã kết thúc";
+                                    }                                  
+                                }
+                            }
+                            else
+                            {
+                                tinhTrang = "Đã kết thúc";
+                            }
+                            
+                        }
+                        if (nambatdau == now.Year)
+                        {
+                            if (thangbatdau == now.Month)
+                            {
+                                if (ngaybatdau == now.Day|| (ngaybatdau < now.Day && ngayketthuc >= now.Day))
+                                {
+                                    tinhTrang = "Đang diễn ra";
+                                }
+                                if (ngaybatdau < now.Day)
+                                {
+                                    tinhTrang = "Chưa bắt đầu";
+                                }
+                                if(ngayketthuc < now.Day)
+                                {
+                                    tinhTrang = "Đã kết thúc";
+                                }
+                            }
+                            if (thangbatdau < now.Month)
+                            {
+                                if (thangketthuc > now.Month)
+                                {
+                                    tinhTrang = "Đang diễn ra";
+                                }
+                                if(thangketthuc== now.Month)
+                                {
+                                    if(ngayketthuc>= now.Day)
+                                    {
+                                        tinhTrang = "Đang diễn ra"; 
+                                    }
+                                    if(ngayketthuc< now.Day)
+                                        tinhTrang = "Đã kết thúc";
+                                }
+                                else
+                                    tinhTrang = "Đã kết thúc";
+                            }
+                            if(thangbatdau > now.Month)
+                                tinhTrang = "Chưa bắt đầu";
+                        }
+                        if(nambatdau > now.Year)
+                        {
+                            tinhTrang = "Chưa bắt đầu";
+                        }    
+
+                    }
+                }
+                return tinhTrang;
+            }
+
+        }*/
 
         public khuyenmais GetKhuyenMaiById(int id)
         {
@@ -913,6 +1086,43 @@ namespace Framework_Admin.Models
             }
             return list;
         }
+
+        public List<object> FilterDoanhThu(DateTime Start, DateTime End)
+        {
+            string start = string.Format("{0:yyyy/MM/dd}", Convert.ToDateTime(Start));
+            string end = string.Format("{0:yyyy/MM/dd}", Convert.ToDateTime(End));
+            List<object> list = new List<object>();
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                string str = @"SELECT DISTINCT sum(tongtien) as doanhthu, Month(orders.ngaylap) as month
+                            from booklist b, detail_order o, orders
+                                where b.masach = o.masach and o.madh = orders.madh and tinhtrangthanhtoan = 'Đã thanh toán'and (ngaylap BETWEEN @start AND @end)
+                                GROUP by Month(orders.ngaylap)
+                            ORDER BY Month(orders.ngaylap) ASC";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("start", start);
+                cmd.Parameters.AddWithValue("end", end);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var ob = new
+                        {
+                            doanhthu = Convert.ToInt32(reader["doanhthu"]),
+                            month = Convert.ToInt32(reader["month"]),
+                        };
+                        list.Add(ob);
+                    }
+                    reader.Close();
+                }
+
+                conn.Close();
+
+            }
+            return list;
+        }
+
 
         public admin_accounts login(string username, string password)
         {

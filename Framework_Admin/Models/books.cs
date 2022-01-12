@@ -23,7 +23,7 @@ namespace Framework_Admin.Models
         private string tensach;     
         private string theloai;
         private int soluong;
-
+        private int soluongban;
         public int Masach { get => masach; set => masach = value; }
         public string Tensach { get => tensach; set => tensach = value; }
         public string Hinhanh { get => hinhanh; set => hinhanh = value; }
@@ -40,10 +40,10 @@ namespace Framework_Admin.Models
         public string Hinhthuc { get => hinhthuc; set => hinhthuc = value; }
         public string Sobinhchon { get => sobinhchon; set => sobinhchon = value; }
         public int Soluong { get => soluong; set => soluong = value; }
-
+        public int Soluongban { get => soluongban; set => soluongban = value; }
         public books() { }
 
-        public books(int Masach, int danhgia, int giaban, int giagoc, int giamgia, string hinhanh, string hinhthuc, string mota, DateTime namxb, string ngonngu, string nxb, string sobinhchon, string tacgia, string tensach, string theloai, int soluong)
+        public books(int Masach, int danhgia, int giaban, int giagoc, int giamgia, string hinhanh, string hinhthuc, string mota, DateTime namxb, string ngonngu, string nxb, string sobinhchon, string tacgia, string tensach, string theloai, int soluong, int soluongban)
         {
             this.masach = Masach;
             this.danhgia = danhgia;
@@ -61,6 +61,7 @@ namespace Framework_Admin.Models
             this.tensach = tensach;
             this.theloai = theloai;
             this.soluong = soluong;
+            this.soluongban = soluongban;
         }
 
 

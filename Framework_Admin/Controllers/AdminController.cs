@@ -83,6 +83,7 @@ namespace Framework_Admin.Controllers
         public IActionResult DS_KhuyenMai()
         {
             ViewBag.khuyenmai = _storeContext.GetKhuyenMai();
+           /* ViewBag.TinhTrangKhuyenMai = _storeContext.TinhTrangKhuyenMai();*/
             return View();
 
 
@@ -182,9 +183,20 @@ namespace Framework_Admin.Controllers
         {
             ViewBag.ThongKe = _storeContext.FilterThongKe(start, end);
             ViewBag.ThongKeTheLoai = _storeContext.FilterThongKeTheLoai( start,  end);
+            ViewBag.DataDoanhThu = _storeContext.FilterDoanhThu(start, end);
             return View("ThongKe");
 
         }
+
+
+
+
+
+
+
+
+
+
 
         public IActionResult login()
         {

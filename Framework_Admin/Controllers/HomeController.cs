@@ -20,13 +20,9 @@ namespace Framework_Admin.Controllers
             _storeContext = storeContext;
         }
 
-        public IActionResult Index(int soLS)
+        public IActionResult Index()
         {
-            var listbook = _storeContext.GetBook(soLS);
-            if (listbook != null)
-            {
-                return View(listbook);
-            }
+            ViewBag.listbook = _storeContext.GetBook();
             return View();
             
             
