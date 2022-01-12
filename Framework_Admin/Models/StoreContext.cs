@@ -914,6 +914,30 @@ namespace Framework_Admin.Models
             return list;
         }
 
+        public admin_accounts login(string username, string password)
+        {
+            admin_accounts admin_Accounts = new admin_accounts();
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                var str = "select * from admin_accounts where tenad=@username and matkhau=@password";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("username", username);
+                cmd.Parameters.AddWithValue("password", password);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        admin_Accounts.Maad = Convert.ToInt32(reader["maad"]);
+                        admin_Accounts.Tenad = reader["tenad"].ToString();
+                        admin_Accounts.Matkhau = reader["matkhau"].ToString();
+                    }
+                    reader.Close();
+                }
+                conn.Close();
+            }
+            return admin_Accounts;
+        }
 
 
     }

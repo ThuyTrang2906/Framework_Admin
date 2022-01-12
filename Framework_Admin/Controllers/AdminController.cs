@@ -1,9 +1,11 @@
 ﻿using Framework_Admin.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Framework_Admin.Controllers
@@ -182,6 +184,26 @@ namespace Framework_Admin.Controllers
             ViewBag.ThongKeTheLoai = _storeContext.FilterThongKeTheLoai( start,  end);
             return View("ThongKe");
 
+        }
+
+        public IActionResult login()
+        {
+            string username = HttpContext.Request.Form["username"];
+            string password = HttpContext.Request.Form["password"];
+
+            StoreContext context = HttpContext.RequestServices.GetService(typeof(Framework_Admin.Models.StoreContext)) as StoreContext;
+            admin_accounts res = context.login(username, password);
+            if (res != null)
+            {
+                ViewBag.status = "Success";
+                ViewBag.infor = res;
+                HttpContext.Session.SetString("UserSession", JsonSerializer.Serialize(res));
+            }
+            else
+            {
+                ViewBag.status = "Fail";
+            }
+            return View();
         }
     }
 }
